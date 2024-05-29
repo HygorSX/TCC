@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../css/login.css" />
+    <title>Faça seu login ou registre-se</title>
+  </head>
+
+  <body>
+    
+    <section class="container" id="container">
+      <section class="forms-container">
+        <section class="signin-signup">
+          <form action="#" class="sign-in-form">
+            <h2 class="title">Faça seu login</h2>
+            <section class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Nome" id="login" />
+            </section>
+            <section class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Senha" id="senha" />
+            </section>
+            <input type="submit" onclick="logar(); return false" class="btn solid"> 
+            <p class="social-text">Ou nos siga em outras redes sociais</p>
+            <section class="social-media">
+              <a href="#" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </section>
+          </form>
+          <form action="#" class="sign-up-form">
+            <h2 class="title">Cadastre-se</h2>
+            <section class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Nome" id="username" />
+              <section class="img-control">
+                <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
+                  <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
+                </section>
+              <small>Error Message</small>
+            </section>
+            <section class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email" id="email"/>
+              <section class="img-control">
+                <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
+                  <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
+                </section>
+
+              <small>Error Message</small>
+            </section>
+            <section class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Senha" id="password"/>
+              <section class="img-control">
+              <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
+                <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
+
+              </section>
+              <small>Error Message</small>
+            </section>
+            <section class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Confirme a senha" id="password-two"/>
+              <section class="img-control">
+                <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
+                  <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
+                </section>
+                <section class="aviso"> <p>*Mínimo 8 caracteres</p></section>
+                
+              <small>Error Message</small>
+            </section>
+            <input type="submit" class="btn" value="Registre-se" />
+            <p class="social-text">Ou nos siga em outras redes sociais</p>
+            <section class="social-media">
+              <a href="#" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </section>
+          </form>
+        </section>
+      </section>
+
+      <section class="panels-container">
+        <section class="panel left-panel">
+          <section class="content">
+            <h3>Novo aqui?</h3>
+            <p>
+              Não perca mais tempo! Registre-se agora e aproveite tudo o que nosso site tem a oferecer
+            </p>
+            <button class="btn transparent" id="sign-up-btn">
+              Registre-se
+            </button>
+          </section>
+          <img src="../imagens_login/ImagemPai.svg" class="image" alt="" />
+        </section>
+        <section class="panel right-panel">
+          <section class="content">
+            <h3>Já é cliente?</h3>
+            <p>
+              Bem-vindo(a)! Entre no nosso site e faça parte da nossa comunidade.
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              Faça seu login
+            </button>
+          </section>
+          <img src="../imagens_login/LoginImage.svg" class="image" alt="" />
+        </section>
+      </section>
+    </section>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

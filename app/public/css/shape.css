@@ -1,0 +1,98 @@
+.selecao_produtos{
+    display: flex;
+}
+.container {
+    width: 370px;
+    margin-top: 15px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+.filter {
+    padding: 20px;
+    max-width: 200px;
+}
+
+.filter p {
+    margin: 0;
+}
+
+.section {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+@media (max-width: 1200px){
+    .container{
+        width: 1020px;
+    }
+    .selecao_produtos{
+        display: block;
+    }
+    .bloco-checkbox{
+        display: flex;
+        gap: 35px;
+        font-size: 13px;
+        width: 400px;
+    }
+    .produtos{
+        margin-top: -50px;
+}
+.titulo-promo{
+    font-size: 28px;
+}
+}
+
+@media (max-width: 905px){
+    .container{
+        width: 700px;
+    }
+    .selecao_produtos{
+        display: block;
+    }
+    .bloco-checkbox{
+        display: flex;
+        gap: 35px;
+        font-size: 13px;
+        width: 400px;
+    }
+    .produtos{
+        margin-top: -50px;
+    }
+    .titulo-promo{
+        font-size: 29px;
+        padding: 30px 80px;
+    }
+}
+@media (max-width: 480px){
+    .titulo-promo{
+        font-size: 20px;
+        padding: 10px;
+    }
+    .selecao_produtos{
+        display: block;
+    }
+    .bloco-checkbox{
+        display: flex;
+        gap: 35px;
+        font-size: 13px;
+        width: 400px;
+    }
+    .produtos{
+        margin-top: -50px;
+    }
+}

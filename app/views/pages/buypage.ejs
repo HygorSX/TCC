@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style_buy.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/produtos.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+    <header> 
+        <a href="/" class="logo"><i class="ri-ancient-gate-fill"></i><span>Skooterz</span>
+    </a>
+        </a>
+        </section>
+        <ul class="navbar">
+            
+            <li><a href="/shape">Shapes </a>
+            <li><a href="/skate">Skates </a>
+            <li><a href="/roupas">Roupas </a>
+            <li><a href="/acessorios">Acessórios</a>
+            <li><a href="/tenis">Tenis</a>
+            
+        </ul><!--Cabecalho-Link-->
+    <section class="main">
+        <a href="/login" class="user"><i class="ri-user-3-fill"></i>Faça seu login <br>ou registre-se</a>
+        <section class="bx bx-menu" id="menu-icon"></section>
+        <section class="search-box">
+            <input type="text" class="search-txt" placeholder="Pesquisar">
+            <a href="#" class="search-btn">
+                <img src="../imagens/001-loupe.png" alt="Lupa" height="20" width="20" ></a>
+        </section>
+    
+    </header>
+
+
+    <main>
+        <section>
+            <section class="container">
+                <section class="left-side">
+                <section class="items">
+                    <section class="select-image" id="select-image">
+                        <img src="../imagens/produto_1.avif">
+                        </section>
+    
+                        <section class="thumbnails">
+                            <section class="thumbnail">
+                                <img src="../imagens/images_buys/CapuzMoletom.avif">
+                                </section>
+    
+                                <section class="thumbnail">
+                                    <img src="../imagens/images_buys/CorpoTodo.avif">
+                                    </section>
+    
+                                    <section class="thumbnail">
+                                        <img src="../imagens/images_buys/CostaMoletom.avif">
+                                    </section>
+    
+                                    <section class="thumbnail">
+                                        <img src="../imagens/images_buys/VaziaMoletom.avif">
+    
+                                        <script>
+                                            // Obtém todas as imagens pequenas
+                                            const smallImages = document.querySelectorAll('.thumbnail');
+                                        
+                                            // Obtém a imagem principal (certifique-se de que o elemento da imagem principal tenha um ID apropriado)
+                                            const mainImage = document.querySelector('.select-image img');
+                                        
+                                            // Adiciona um ouvinte de evento de clique a cada imagem pequena
+                                            smallImages.forEach((thumbnail) => {
+                                                thumbnail.addEventListener('click', () => {
+                                                    // Obtém o URL da imagem clicada usando o atributo src
+                                                    const newImageSrc = thumbnail.querySelector('img').getAttribute('src');
+                                        
+                                                    // Define o URL da imagem principal para o novo URL
+                                                    mainImage.src = newImageSrc;
+                                                });
+                                            });
+    
+                                            
+                                        </script>
+                                                            
+                    </section>
+                </section>
+            </section>
+            <section class="produto">
+                <section class="info-produto">
+                    <h2 class="nome-produto">MOLETOM CAPUZ GRAPHIC <br> SHMOOFOIL (GÊNERO NEUTRO)</h2>
+                    <h2 class="preco-produto"> R$549,99 </h2>
+                        <select id="parcelas">
+                            <option value="1">1X de R$ 549,99 Sem Juros</option>
+                            <option value="2">2X de R$ 274,99 Sem Juros</option>
+                            <option value="3">3X de R$ 183,33 Sem Juros</option>
+                            <option value="4">4X de R$ 137,49 Sem Juros</option>
+                            <option value="5">5X de R$ 109,99 Sem Juros</option>
+                            <option value="6">6X de R$ 91,66 Sem Juros</option>
+                        </select>
+                        <section id="numeros-calcado">
+                            <label class="tamanho">Tamanho:</label><br>
+                            <section class="tamanho-calçado">P</section>
+                            <section class="tamanho-calçado">M</section>
+                            <section class="tamanho-calçado">GG</section>
+                            <section class="tamanho-calçado">XL</section>
+                            <section class="tamanho-calçado">XL</section>
+                        </section>
+                        <section>
+                            <label class="quantidade">Quantidade:</label><br>
+                            <input type="number" id="quantidade" value="1" min="1">
+                            <button onclick="aumentarQuantidade()">+</button>
+                            <button onclick="diminuirQuantidade()">-</button>
+    
+                            <script>
+                            function aumentarQuantidade() {
+                            var quantidadeInput = document.getElementById("quantidade");
+                            quantidadeInput.value = parseInt(quantidadeInput.value) + 1;
+                        }
+    
+                        // Função para diminuir a quantidade
+                            function diminuirQuantidade() {
+                            var quantidadeInput = document.getElementById("quantidade");
+                            if (parseInt(quantidadeInput.value) > 1) {
+                                quantidadeInput.value = parseInt(quantidadeInput.value) - 1;
+                            }
+                        }
+                            </script>
+                        </section>
+                        <button class="comprar">
+                            COMPRAR
+                        </button>
+                </section>
+            </section>
+        </section>
+        </section>
+        </section>
+    
+        <section class="descricao">
+            <h1 class="detalhes">Descrição:</h1>
+            <p>
+                A arte icônica de Mark Gonzales mistura a estética urbana que ele viu crescendo em South Gate, Los Angeles, com ilustrações expressivas e muita imaginação. Para o blusão com capuz adidas Skateboarding Shmoofoil Logo, The Gonz apresenta uma versão pintada com spray do clássico personagem Shmoo. A estrutura de fleece médio encorpado significa que ela é feita para skate. Este moletom foi produzido com UNITEFIT, um sistema de ajuste para todos os gêneros criado com base em uma variedade de tamanhos, corpos e formas.
+                Os nossos produtos em algodão apoiam a plantação mais sustentável dessa matéria-prima.
+            </p>
+            <h1 class="info-adicionais">Mais Informações:</h1>
+            <ul>
+                <li>• Modelagem padrão</li>
+                <li>• Capuz com cordão</li>
+                <li>• Fleece 70% algodão, 30% poliéster reciclado</li>
+                <li>• Bolso canguru</li>
+                <li>• Feito com Better Cotton</li>
+                <li>• Cor do artigo: Core White / Preloved Fuchsia</li>
+                <li>• Código do artigo: HS3052</li>
+            </ul>
+        </section>
+        <h1 class="titulo"><a class="todos">Você</a> pode gostar</h1>
+    <section class="produtos">
+        <section class="produto-card">
+        <img src="../imagens/Skate_1.png" alt="imagem do produto">
+        <h2><a href="#">Titulo do produto</a></h2>
+        <p class="preço">Preço original: R$20,99</p>
+        <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+        <p class="desconto"> Você economiza: R$ 10.00</p>
+        <a href="#" class="buy">Compre Agora</a>
+        </section>
+        <section class="produto-card">
+            <img src="../imagens/Skate_2.jpg" alt="imagem do produto">
+            <h2><a href="#">Titulo do produto</a></h2>
+            <p class="preço">Preço original: R$20,99</p>
+            <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+            <p class="desconto"> Você economiza: R$ 10.00</p>
+            <a href="#" class="buy">Compre Agora</a>
+            </section>
+            <section class="produto-card">
+                <img src="../imagens/Skate_3.jpg" alt="imagem do produto">
+                <h2><a href="#">Titulo do produto</a></h2>
+                <p class="preço">Preço original: R$20,99</p>
+                <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+                <p class="desconto"> Você economiza: R$ 10.00</p>
+                <a href="#" class="buy">Compre Agora</a>
+                </section>
+                <section class="produto-card">
+                    <img src="../imagens/Skate_4.jpg" alt="imagem do produto">
+                    <h2><a href="#">Titulo do produto</a></h2>
+                    <p class="preço">Preço original: R$20,99</p>
+                    <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+                    <p class="desconto"> Você economiza: R$ 10.00</p>
+                    <a href="#" class="buy">Compre Agora</a>
+                    </section>
+    </section>
+    <section class="produtos">
+        <section class="tenis-card">
+        <img src="../imagens/produto_2.avif" alt="imagem do produto">
+        <h2><a href="#">Titulo do produto</a></h2>
+        <p class="preço">Preço original: R$20,99</p>
+        <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+        <p class="desconto"> Você economiza: R$ 10.00</p>
+        <a href="#" class="buy">Compre Agora</a>
+        </section>
+        <section class="tenis-card">
+            <img src="../imagens/produto_3.avif" alt="imagem do produto">
+            <h2><a href="#">Titulo do produto</a></h2>
+            <p class="preço">Preço original: R$20,99</p>
+            <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+            <p class="desconto"> Você economiza: R$ 10.00</p>
+            <a href="#" class="buy">Compre Agora</a>
+            </section>
+            <section class="tenis-card">
+                <img src="../imagens/produto_4.avif" alt="imagem do produto">
+                <h2><a href="#">Titulo do produto</a></h2>
+                <p class="preço">Preço original: R$20,99</p>
+                <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+                <p class="desconto"> Você economiza: R$ 10.00</p>
+                <a href="#" class="buy">Compre Agora</a>
+                </section>
+                <section class="tenis-card">
+                    <img src="../imagens/produto_5.avif" alt="imagem do produto">
+                    <h2><a href="#">Titulo do produto</a></h2>
+                    <p class="preço">Preço original: R$20,99</p>
+                    <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
+                    <p class="desconto"> Você economiza: R$ 10.00</p>
+                    <a href="#" class="buy">Compre Agora</a>
+                    </section>
+    </section>
+    <footer>
+        <section class="container-footer">
+          <section class="row-footer">
+              <!-- Footer col-->
+              <section class="footer-col">
+                  <h4>Empresa</h4>
+                  <ul>
+                      <li> <a href=""> Quem Somos</a> 
+                      <li> <a href=""> Politíca de privacidade</a> 
+                      <li> <a href=""> Agregados/Afiliados </a> 
+                  </ul>
+                  
+              </section>
+              
+              <!--end footer col-->
+              <!-- Footer col-->
+              <section class="footer-col">
+                  <h4>Obter Ajuda</h4>
+                  <ul>
+                      <li> <a href=""> Devoluções</a> 
+                      <li> <a href=""> Status de pedido </a> 
+                      <li> <a href=""> Opções de pagamento  </a> 
+                  </ul>
+                  
+              </section>
+              <!--end footer col-->
+              <!-- Footer col-->
+              <section class="footer-col">
+                  <h4>Entre em contato</h4>
+                  <ul>
+                      <li> <a href=""><i class="fa fa-whatsapp"></i> 551199999-9999</a> 
+                      <li> <a href=""> sk8california@gmail.com</a> 
+                      <li> <a href=""> Rua sucesso</a> 
+                    
+                      
+                  </ul>
+                  
+              </section>
+              <!--end footer col-->
+              <!-- Footer col-->
+              <section class="footer-col">
+                  <h4>Cadastre-se para mais!</h4>
+                  <section class="form-sub">
+                      <form>
+                        <button><a href="../"> Cadastre-se</a></button>
+                      </form>
+                  </section>
+                  <section class="medias-socias">
+                      <a href=""><i class="fa fa-facebook"></i></a>
+                      <a href=""><i class="fa fa-instagram"></i></a>
+                      <a href=""><i class="fa fa-twitter"></i></a>
+                      <a href=""><i class="fa fa-github"></i></a>
+
+                    </section>
+              </section>
+      </footer>
+    </main>
+    <script src="../js/buy.js"></script>
+</body>
+</html>
