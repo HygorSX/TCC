@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 </head>
-<body>
+<body onload="updateUserUI()">
 
     <header> 
         <a href="/" class="logo"><i class="ri-ancient-gate-fill"></i><span>Skooterz™</span>
@@ -36,15 +36,32 @@
             <li><a href="/tenis">Tenis</a></li>
             
         </ul><!--Cabecalho-Link-->
-    <section class="main">
-        
-        <a href="/login" class="user" id="user"><i class="ri-user-3-fill"></i>Faça seu login <br>ou registre-se</a>
-        <section class="bx bx-menu" id="menu-icon"></section>
-        <section class="search-box">
-            <input type="text" class="search-txt" placeholder="Pesquisar">
-            <a href="#" class="search-btn">
-                <img src="../imagens/001-loupe.png" alt="Lupa" height="20" width="20" ></a>
+        <section class="main">
+            <a href="/login" class="user" id="user"><i class="ri-user-3-fill"></i>Faça seu login <br>ou registre-se</a>
+            <section class="bx bx-menu" id="menu-icon"></section>
+            <section class="search-box">
+                <input type="text" class="search-txt" placeholder="Pesquisar">
+                <a href="#" class="search-btn">
+                    <img src="../imagens/001-loupe.png" alt="Lupa" height="20" width="20"></a>
+            </section>
         </section>
+        <script>
+            function updateUserUI() {
+        const userName = localStorage.getItem('userName');
+        if (userName) {
+            const userElement = document.getElementById('user');
+            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
+            userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
+        }
+    }
+
+    
+
+    // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
+    window.onload = function() {
+        updateUserUI();
+    }
+        </script>
     
     </header>
     

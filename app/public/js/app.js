@@ -9,18 +9,43 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
-function logar(){
+function logar() {
+    const login = document.getElementById('login').value;
+    const senha = document.getElementById('senha').value;
 
-  var login = document.getElementById('login').value;
-  var senha = document.getElementById('senha').value;
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nome: login, password: senha }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            localStorage.setItem('userName', login);
+            window.location.href = '/'; // Redirecione para a página inicial
+        } else {
+            alert('Nome ou senha incorretos');
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
 
-  if(login == "admin" && senha == "admin"){
-      alert('Sucesso');
-      location.href = "../index.html";
-  }else{
-      alert('Usuario ou senha incorretos');
-  }
+function updateUserUI() {
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+        const userElement = document.getElementById('user');
+        userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
+        userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
+    }
+}
 
+// Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
+window.onload = function() {
+    updateUserUI();
 }
 
 const form = document.getElementById('container')
@@ -101,20 +126,3 @@ function setSuccessFor(input) {
 function isEmail(email) {
     return /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(email)
 }
-
-$.ajax({
-    url: urlApi + "/criar_usuario",
-    type: "POST",
-    data: JSON.stringify({nome:"carlos", email:"carlos@gmail.com", password:"12345"}),
-    contentType: "application/json",
-    dataType: "json",
-
-    success: function(respostas){
-        console.log(respostas);
-    },
-
-    error: function(err){
-        console.log("Erro", err)
-
-    }
-})

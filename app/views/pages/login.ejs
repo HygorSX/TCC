@@ -43,65 +43,79 @@
               </a>
             </section>
           </form>
-          <form action="#" class="sign-up-form">
+          <form action="#" class="sign-up-form" id="signUpForm">
             <h2 class="title">Cadastre-se</h2>
             <section class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="Nome" id="username" />
-              <section class="img-control">
-                <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
-                  <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Nome" id="username" />
+                <section class="img-control">
+                    <i class="img-success"><img src="../imagens_login/success-icon.svg" alt=""></i>
+                    <i class="img-error"><img src="../imagens_login/error-icon.svg" alt=""></i>
                 </section>
-              <small>Error Message</small>
+                <small>Error Message</small>
             </section>
             <section class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" id="email"/>
-              <section class="img-control">
-                <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
-                  <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email" id="email"/>
+                <section class="img-control">
+                    <i class="img-success"><img src="../imagens_login/success-icon.svg" alt=""></i>
+                    <i class="img-error"><img src="../imagens_login/error-icon.svg" alt=""></i>
                 </section>
-
-              <small>Error Message</small>
+                <small>Error Message</small>
             </section>
             <section class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Senha" id="password"/>
-              <section class="img-control">
-              <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
-                <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
-
-              </section>
-              <small>Error Message</small>
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Senha" id="password"/>
+                <section class="img-control">
+                    <i class="img-success"><img src="../imagens_login/success-icon.svg" alt=""></i>
+                    <i class="img-error"><img src="../imagens_login/error-icon.svg" alt=""></i>
+                </section>
+                <small>Error Message</small>
             </section>
             <section class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Confirme a senha" id="password-two"/>
-              <section class="img-control">
-                <i class="img-success" ><img src="../imagens_login/success-icon.svg" alt=""></i>
-                  <i class="img-error" ><img src="../imagens_login/error-icon.svg" alt=""></i>
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Confirme a senha" id="password-two"/>
+                <section class="img-control">
+                    <i class="img-success"><img src="../imagens_login/success-icon.svg" alt=""></i>
+                    <i class="img-error"><img src="../imagens_login/error-icon.svg" alt=""></i>
                 </section>
-                <section class="aviso"> <p>*Mínimo 8 caracteres</p></section>
-                
-              <small>Error Message</small>
+                <section class="aviso"><p>*Mínimo 8 caracteres</p></section>
+                <small>Error Message</small>
             </section>
             <input type="submit" class="btn" value="Registre-se" />
             <p class="social-text">Ou nos siga em outras redes sociais</p>
             <section class="social-media">
-              <a href="#" class="social-icon">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social-icon">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#" class="social-icon">
-                <i class="fab fa-google"></i>
-              </a>
-              <a href="#" class="social-icon">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
             </section>
-          </form>
+        </form>
+        <script>
+          document.getElementById('signUpForm').addEventListener('submit', function(e) {
+              e.preventDefault();
+          
+              const username = document.getElementById('username').value;
+              const email = document.getElementById('email').value;
+              const password = document.getElementById('password').value;
+          
+              fetch('http://localhost:3000/criar_usuario', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ nome: username, email: email, password: password }),
+              })
+              .then(response => response.json())
+              .then(data => {
+                  console.log('Success:', data);
+              })
+              .catch((error) => {
+                  console.error('Error:', error);
+              });
+          });
+          </script>
+
         </section>
       </section>
 
