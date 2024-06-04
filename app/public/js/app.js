@@ -22,8 +22,11 @@ function logar() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log("retorno login", data)
         if (data.success) {
-            localStorage.setItem('userName', login);
+            localStorage.setItem('userName', data.info_usuario.NOME_CLIENTE);
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('usuario', JSON.stringify(data.info_usuario))
             window.location.href = '/'; // Redirecione para a página inicial
         } else {
             alert('Nome ou senha incorretos');

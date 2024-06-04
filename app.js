@@ -4,7 +4,8 @@ const app = express();
 const port = 80;
 const portApi = 3000;
 const cors = require("cors");
-const conn = require('./app/other/conexao');
+const pool = require('./app/other/conexao');
+/*var session = require("express-session");*/
 
 // Configurando cors para evitar erros
 api.use(cors());
@@ -17,6 +18,13 @@ app.set("views", "./app/views");
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
+
+/*app.use(
+  session({
+    secret: "HELLonODE",
+    resave: false,
+    saveUninitialized: false,
+  }));*/
 
 var rotas = require("./app/routes/router");
 app.use("/", rotas);
@@ -32,26 +40,7 @@ api.listen(portApi, () => {
   console.log(`Api ouvindo na porta ${portApi}\nhttp://localhost:${portApi}`);
 });
 
-conn.connect(function(err) {
+pool.query("SELECT 1", (err, results) => {
   if (err) throw err;
   console.log("Banco conectado");
-});
-
-// Rota de login
-api.post('/login', (req, res) => {
-  const { nome, password } = req.body;
-  const sql = 'SELECT * FROM CLIENTES WHERE NOME_CLIENTE = ? AND PASSWORD_CLIENTE = ?';
-
-  conn.query(sql, [nome, password], (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ success: false, message: 'Erro no servidor' });
-    }
-
-    if (results.length > 0) {
-      res.status(200).json({ success: true });
-    } else {
-      res.status(401).json({ success: false, message: 'Nome ou senha incorretos' });
-    }
-  });
 });

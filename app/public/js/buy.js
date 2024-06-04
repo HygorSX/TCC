@@ -26,15 +26,6 @@ function updateUserUI() {
     }
 }
 
-function logoutUser() {
-    localStorage.removeItem('userName');
-    location.reload(); // Recarrega a página para refletir as mudanças
-}
-
-document.getElementById('logout').addEventListener('click', function() {
-    logoutUser();
-});
-
 // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
 window.onload = function() {
     updateUserUI();
