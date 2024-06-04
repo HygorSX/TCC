@@ -11,6 +11,7 @@ class ControllerUsuario {
                 return res.status(500).json({ error: 'Database error' });
             }
             res.status(200).json({ message: "Usuário criado com sucesso", id: results.insertId });
+
         });
     }
 }

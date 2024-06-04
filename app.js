@@ -37,11 +37,6 @@ conn.connect(function(err) {
   console.log("Banco conectado");
 });
 
-conn.connect(function (err) {
-  if (err) throw err;
-  console.log('Banco conectado');
-});
-
 // Rota de login
 api.post('/login', (req, res) => {
   const { nome, password } = req.body;

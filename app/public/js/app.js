@@ -34,20 +34,6 @@ function logar() {
     });
 }
 
-function updateUserUI() {
-    const userName = localStorage.getItem('userName');
-    if (userName) {
-        const userElement = document.getElementById('user');
-        userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
-        userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
-    }
-}
-
-// Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
-window.onload = function() {
-    updateUserUI();
-}
-
 const form = document.getElementById('container')
 const username = document.getElementById('username')
 const email = document.getElementById('email')
