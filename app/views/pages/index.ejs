@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/produtos.css">
     <link rel="stylesheet" href="../css/avaliação.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/registrar_empresa.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
@@ -222,59 +223,108 @@
       <footer>
         <section class="container-footer">
           <section class="row-footer">
-              <!-- Footer col-->
-              <section class="footer-col">
-                  <h4>Empresa</h4>
-                  <ul>
-                      <li> <a href=""> Quem Somos</a> </li>
-                      <li> <a href=""> Politíca de privacidade</a> </li>
-                      <li> <a href=""> Agregados/Afiliados </a> </li>
-                  </ul>
-                  
+            <!-- Footer col-->
+            <section class="footer-col">
+              <h4>Empresa</h4>
+              <ul>
+                <li><a href="">Quem Somos</a></li>
+                <li><a href="">Política de privacidade</a></li>
+                <li><a href="">Agregados/Afiliados</a></li>
+              </ul>
+            </section>
+      
+            <!-- Footer col-->
+            <section class="footer-col">
+              <h4>Obter Ajuda</h4>
+              <ul>
+                <li><a href="">Devoluções</a></li>
+                <li><a href="">Status de pedido</a></li>
+                <li><a href="">Opções de pagamento</a></li>
+              </ul>
+            </section>
+      
+            <!-- Footer col-->
+            <section class="footer-col">
+              <h4>Entre em contato</h4>
+              <ul>
+                <li><a href=""><i class="fa fa-whatsapp"></i> 551199999-9999</a></li>
+                <li><a href="">sk8california@gmail.com</a></li>
+                <li><a href="">Rua sucesso</a></li>
+              </ul>
+            </section>
+      
+            <!-- Footer col-->
+            <section class="footer-col">
+              <h4>Cadastre-se para mais!</h4>
+              <section class="form-sub">
+                <button id="openModalBtn">Cadastre-se</button>
               </section>
-              
-              <!--end footer col-->
-              <!-- Footer col-->
-              <section class="footer-col">
-                  <h4>Obter Ajuda</h4>
-                  <ul>
-                      <li> <a href=""> Devoluções</a> </li>
-                      <li> <a href=""> Status de pedido </a> </li>
-                      <li> <a href=""> Opções de pagamento  </a> </li>
-                  </ul>
-                  
+              <section class="medias-socias">
+                <a href=""><i class="fa fa-facebook"></i></a>
+                <a href=""><i class="fa fa-instagram"></i></a>
+                <a href=""><i class="fa fa-twitter"></i></a>
+                <a href=""><i class="fa fa-github"></i></a>
               </section>
-              <!--end footer col-->
-              <!-- Footer col-->
-              <section class="footer-col">
-                  <h4>Entre em contato</h4>
-                  <ul>
-                      <li> <a href=""><i class="fa fa-whatsapp"></i> 551199999-9999</a> </li>
-                      <li> <a href=""> sk8california@gmail.com</a> </li>
-                      <li> <a href=""> Rua sucesso</a> </li>
-                    
-                      
-                  </ul>
-                  
-              </section>
-              <!--end footer col-->
-              <!-- Footer col-->
-              <section class="footer-col">
-                  <h4>Cadastre-se para mais!</h4>
-                  <section class="form-sub">
-                      <form>
-                        <button><a href="./login/login.html"> Cadastre-se</a></button>
-                      </form>
-                  </section>
-                  <section class="medias-socias">
-                      <a href=""><i class="fa fa-facebook"></i></a>
-                      <a href=""><i class="fa fa-instagram"></i></a>
-                      <a href=""><i class="fa fa-twitter"></i></a>
-                      <a href=""><i class="fa fa-github"></i></a>
-
-                    </section>
-              </section>
+            </section>
+          </section>
+        </section>
       </footer>
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <!-- Formulário de registro -->
+          <div class="container">
+            <div class="registro">Registro</div>
+            <form action="#">
+              <div class="form first">
+                <div class="details personal">
+                  <span class="title">Detalhes da empresa</span>
+                  <div class="fields">
+                    <div class="input-field">
+                      <label>Nome Completo</label>
+                      <input type="text" placeholder="Digite o nome completo" required>
+                    </div>
+                    <div class="input-field">
+                      <label>Telefone</label>
+                      <input type="number" placeholder="Digite seu telefone" required>
+                    </div>
+                    <div class="input-field">
+                      <label>Email</label>
+                      <input type="text" placeholder="Digite seu email" required>
+                    </div>
+                    <div class="input-field">
+                      <label>CNPJ</label>
+                      <input type="number" placeholder="Digite seu CNPJ" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="details ID">
+                  <span class="title">Localização</span>
+                  <div class="fields-location">
+                    <div class="input-field">
+                      <label>Logradouro</label>
+                      <input type="text" placeholder="Logradouro" required>
+                    </div>
+                    <div class="input-field">
+                      <label>Bairro</label>
+                      <input type="text" placeholder="Bairro" required>
+                    </div>
+                    <div class="input-field">
+                      <label>Cidade</label>
+                      <input type="text" placeholder="Cidade" required>
+                    </div>
+                  </div>
+                  <button class="nextBtn">
+                    <span class="btnText">Registrar</span>
+                    <i class="uil uil-navigator"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     
     <script src="../js/script.js"></script>
 
