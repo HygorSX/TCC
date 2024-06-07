@@ -272,61 +272,229 @@
 
       <div id="myModal" class="modal">
         <div class="modal-content">
-          <span class="close">&times;</span>
-          <!-- Formulário de registro -->
-          <div class="container">
-            <div class="registro">Registro</div>
-            <form action="#">
-              <div class="form first">
-                <div class="details personal">
-                  <span class="title">Detalhes da empresa</span>
-                  <div class="fields">
-                    <div class="input-field">
-                      <label>Nome Completo</label>
-                      <input type="text" placeholder="Digite o nome completo" required>
+            <span class="close">&times;</span>
+            <!-- Formulário de registro -->
+            <div class="container">
+                <div class="registro">Registro</div>
+                <form id="signUpFormCompany" class="signUpFormCompany">
+                    <div class="form first">
+                        <div class="details personal">
+                            <span class="title">Detalhes da empresa</span>
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Nome Completo</label>
+                                    <input type="text" placeholder="Digite o nome completo" id="name_company">
+                                  <small>Error Message</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>Telefone</label>
+                                    <input type="number" placeholder="Digite seu telefone" id="tel_company">
+                                  <small>Error Message</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>Email</label>
+                                    <input type="text" placeholder="Digite seu email" id="email_company">
+                                  <small>Error Message</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>CNPJ</label>
+                                    <input type="number" placeholder="Digite seu CNPJ" id="CNPJ">
+                                  <small>Error Message</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="details ID">
+                            <span class="title">Localização</span>
+                            <div class="fields-location">
+                                <div class="input-field">
+                                    <label>Logradouro</label>
+                                    <input type="text" placeholder="Logradouro" id="logradouro">
+                                  <small>Error Message</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>Bairro</label>
+                                    <input type="text" placeholder="Bairro" id="bairro">
+                                  <small>Error Message</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>Cidade</label>
+                                    <input type="text" placeholder="Cidade" id="cidade">
+                                  <small>Error Message</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>Senha</label>
+                                    <input type="password" placeholder="Senha" id="password_company">
+                                  <small>Error Message</small>
+                                </div>
+                            </div>
+                            <button class="nextBtn" type="submit">
+                                <span class="btnText">Registrar</span>
+                                <i class="uil uil-navigator"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="input-field">
-                      <label>Telefone</label>
-                      <input type="number" placeholder="Digite seu telefone" required>
-                    </div>
-                    <div class="input-field">
-                      <label>Email</label>
-                      <input type="text" placeholder="Digite seu email" required>
-                    </div>
-                    <div class="input-field">
-                      <label>CNPJ</label>
-                      <input type="number" placeholder="Digite seu CNPJ" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="details ID">
-                  <span class="title">Localização</span>
-                  <div class="fields-location">
-                    <div class="input-field">
-                      <label>Logradouro</label>
-                      <input type="text" placeholder="Logradouro" required>
-                    </div>
-                    <div class="input-field">
-                      <label>Bairro</label>
-                      <input type="text" placeholder="Bairro" required>
-                    </div>
-                    <div class="input-field">
-                      <label>Cidade</label>
-                      <input type="text" placeholder="Cidade" required>
-                    </div>
-                  </div>
-                  <button class="nextBtn">
-                    <span class="btnText">Registrar</span>
-                    <i class="uil uil-navigator"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+                </form>
+                <script>
+                  const form = document.getElementById('signUpFormCompany');
+                  const nameCompany = document.getElementById('name_company');
+                  const telCompany = document.getElementById('tel_company');
+                  const emailCompany = document.getElementById('email_company');
+                  const cnpj = document.getElementById('CNPJ');
+                  const logradouro = document.getElementById('logradouro');
+                  const bairro = document.getElementById('bairro');
+                  const cidade = document.getElementById('cidade');
+                  const passwordCompany = document.getElementById('password_company');
+  
+                  form.addEventListener('submit', (e) => {
+                      e.preventDefault();
+  
+                      if (checkInputs()) {
+                          // All inputs are valid, proceed with form submission
+                          submitForm();
+                      }
+                  });
+  
+                  function checkInputs() {
+                      const nameCompanyValue = nameCompany.value.trim();
+                      const telCompanyValue = telCompany.value.trim();
+                      const emailCompanyValue = emailCompany.value.trim();
+                      const cnpjValue = cnpj.value.trim();
+                      const logradouroValue = logradouro.value.trim();
+                      const bairroValue = bairro.value.trim();
+                      const cidadeValue = cidade.value.trim();
+                      const passwordCompanyValue = passwordCompany.value.trim();
+  
+                      let isValid = true;
+  
+                      if (nameCompanyValue === '') {
+                          setErrorFor(nameCompany, 'Preencha esse campo');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(nameCompany);
+                      }
+  
+                      if (telCompanyValue === '') {
+                          setErrorFor(telCompany, 'Preencha esse campo');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(telCompany);
+                      }
+  
+                      if (emailCompanyValue === '') {
+                          setErrorFor(emailCompany, 'Preencha esse campo');
+                          isValid = false;
+                      } else if (!isEmail(emailCompanyValue)) {
+                          setErrorFor(emailCompany, 'Email inválido');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(emailCompany);
+                      }
+  
+                      if (cnpjValue === '') {
+                          setErrorFor(cnpj, 'Preencha esse campo');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(cnpj);
+                      }
+  
+                      if (logradouroValue === '') {
+                          setErrorFor(logradouro, 'Preencha esse campo');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(logradouro);
+                      }
+  
+                      if (bairroValue === '') {
+                          setErrorFor(bairro, 'Preencha esse campo');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(bairro);
+                      }
+  
+                      if (cidadeValue === '') {
+                          setErrorFor(cidade, 'Preencha esse campo');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(cidade);
+                      }
+  
+                      if (passwordCompanyValue.length < 8) {
+                          setErrorFor(passwordCompany, 'Senha deve ter mais que 8 caracteres');
+                          isValid = false;
+                      } else {
+                          setSuccessFor(passwordCompany);
+                      }
+  
+                      return isValid;
+                  }
+  
+                  function setErrorFor(input, message) {
+                      const formControl = input.parentElement;
+                      const small = formControl.querySelector('small');
+  
+                      small.innerText = message;
+  
+                      formControl.className = 'input-field error';
+                  }
+  
+                  function setSuccessFor(input) {
+                      const formControl = input.parentElement;
+  
+                      formControl.className = 'input-field success';
+                  }
+  
+                  function isEmail(email) {
+                      return /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(email);
+                  }
+  
+                  function submitForm() {
+                      const name_company = nameCompany.value.trim();
+                      const tel_company = telCompany.value.trim();
+                      const email_company = emailCompany.value.trim();
+                      const password_company = passwordCompany.value.trim();
+                      const CNPJ = cnpj.value.trim();
+                      const logradouro = logradouro.value.trim();
+                      const bairro = bairro.value.trim();
+                      const cidade = cidade.value.trim();
+  
+                      fetch('http://localhost:3000/criar_empresa', {
+                          method: 'POST',
+                          headers: {
+                              'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({
+                              name_company: name_company,
+                              tel_company: tel_company,
+                              email_company: email_company,
+                              logradouro: logradouro,
+                              bairro: bairro,
+                              cidade: cidade,
+                              password_company: password_company,
+                              CNPJ: CNPJ
+                          }),
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                          if (data.message) {
+                              window.alert('Empresa criada com sucesso!');
+                          } else {
+                              window.alert('Erro ao criar empresa.');
+                          }
+                      })
+                      .catch((error) => {
+                          console.error('Error:', error);
+                          window.alert('Erro ao criar empresa.');
+                      });
+                  }
+              </script>
+            </div>
         </div>
-      </div>
+    </div>
+    
     
     <script src="../js/script.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/app.js"></script>
 
 </body>
 </html>

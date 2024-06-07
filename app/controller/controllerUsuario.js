@@ -2,7 +2,7 @@ const pool = require("../other/conexao");
 const jwt = require("../other/tokenJwt")
 
 class ControllerUsuario {
-    static Criar(req, res) {
+    static Criar(req, res) { 
       
             let { nome, email, password } = req.body;
             const sql = "INSERT INTO CLIENTES (NOME_CLIENTE, EMAIL_CLIENTE, PASSWORD_CLIENTE) VALUES (?, ?, ?)";

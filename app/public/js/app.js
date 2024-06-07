@@ -13,7 +13,7 @@ function logar() {
     const login = document.getElementById('login').value;
     const senha = document.getElementById('senha').value;
 
-    fetch('http://localhost:3000/login', {
+    fetch('http://localhost:3000/login', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

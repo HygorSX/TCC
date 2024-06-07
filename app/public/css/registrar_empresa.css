@@ -1,7 +1,6 @@
 /* ===== Google Font Import - Poppins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 *{
-
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -97,6 +96,7 @@ form .fields .input-field{
     display: flex;
     flex-direction: column;
     margin: 4px 0;
+    position: relative;
 }
 .input-field label{
     font-size: 12px;
@@ -113,8 +113,9 @@ form .fields .input-field{
     padding: 0 15px;
     height: 42px;
     margin: 8px 0;
+    transition: all 0.3s ease;
 }
-.input-field input :focus,
+.input-field input:focus,
 .input-field select:focus{
     box-shadow: 0 3px 6px rgba(0,0,0,0.13);
 }
@@ -124,6 +125,32 @@ form .fields .input-field{
 }
 .input-field input[type="date"]:valid{
     color: #333;
+}
+
+.input-field small {
+    visibility: hidden;
+    font-size: 11px;
+    color: red;
+}
+
+/* Error styles */
+.input-field.error input,
+.input-field.error select {
+    border-color: red;
+}
+.input-field.error small {
+    visibility: visible;
+    color: red;
+}
+
+/* Success styles */
+.input-field.success input,
+.input-field.success select {
+    border-color: green;
+}
+.input-field.success small {
+    visibility: hidden;
+    color: green;
 }
 
 .container form .fields-location{
@@ -153,7 +180,7 @@ form .fields-location .input-field{
     height: 42px;
     margin: 8px 0;
 }
-.input-field-location input :focus,
+.input-field-location input:focus,
 .input-field-location select:focus{
     box-shadow: 0 3px 6px rgba(0,0,0,0.13);
 }
