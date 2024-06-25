@@ -7,7 +7,9 @@
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     <title>Faça seu login ou registre-se</title>
   </head>
 
@@ -91,33 +93,92 @@
                 <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
             </section>
         </form>
+        
         <script>
-          document.getElementById('signUpForm').addEventListener('submit', function(e) {
-              e.preventDefault();
-           
-              const username = document.getElementById('username').value;
-              const email = document.getElementById('email').value;
-              const password = document.getElementById('password').value;
-          
-              fetch('http://localhost:3000/criar_usuario', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ nome: username, email: email, password: password }),
-              })
-              .then(response => response.json())
-              .then(data => {
-                  console.log('Success:', data);
-              })
-              .catch((error) => {
-                  console.error('Error:', error);
-              });
-          });
-          </script>
-
-        </section>
+        document.getElementById('signUpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('password-two').value;
+        
+            fetch('http://localhost:3000/criar_usuario', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nome: username, email: email, password: password, confirmPassword: confirmPassword }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log('Success:', data);
+                    new Notify({
+                        status: 'success',
+                        title: 'Usuário Cadastrado!',
+                        text: 'Você foi cadastrado com sucesso, faça seu login :)',
+                        effect: 'fade',
+                        speed: 300,
+                        customClass: '',
+                        customIcon: '',
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        notificationsGap: null,
+                        notificationsPadding: null,
+                        type: 'outline',
+                        position: 'x-center',
+                        customWrapper: '',
+                    });
+                } else {
+                    console.error('Erro ao cadastrar:', data.error);
+                    new Notify({
+                        status: 'error',
+                        title: 'Erro ao se cadastrar!',
+                        text: data.error || 'Verifique suas informações e tente novamente!',
+                        effect: 'fade',
+                        speed: 300,
+                        customClass: '',
+                        customIcon: '',
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        notificationsGap: null,
+                        notificationsPadding: null,
+                        type: 'outline',
+                        position: 'x-center',
+                        customWrapper: '',
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Erro:', error);
+                new Notify({
+                    status: 'error',
+                    title: 'Erro ao se cadastrar!',
+                    text: 'Ocorreu um erro no servidor, por favor, tente novamente mais tarde.',
+                    effect: 'fade',
+                    speed: 300,
+                    customClass: '',
+                    customIcon: '',
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    notificationsGap: null,
+                    notificationsPadding: null,
+                    type: 'outline',
+                    position: 'x-center',
+                    customWrapper: '',
+                });
+            });
+        });
+        </script>
       </section>
+    </section>
 
       <section class="panels-container">
         <section class="panel left-panel">

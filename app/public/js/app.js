@@ -13,7 +13,7 @@ function logar() {
     const login = document.getElementById('login').value;
     const senha = document.getElementById('senha').value;
 
-    fetch('http://localhost:3000/login', { 
+    fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -29,89 +29,144 @@ function logar() {
             localStorage.setItem('usuario', JSON.stringify(data.info_usuario))
             window.location.href = '/'; // Redirecione para a página inicial
         } else {
-            alert('Nome ou senha incorretos');
+            new Notify({
+                status: 'error',
+                title: 'Erro ao fazer login!',
+                text: 'Verifique seus dados e tente novamente!',
+                effect: 'fade',
+                speed: 300,
+                customClass: '',
+                customIcon: '',
+                showIcon: true,
+                showCloseButton: true,
+                autoclose: true,
+                autotimeout: 3000,
+                notificationsGap: null,
+                notificationsPadding: null,
+                type: 'outline',
+                position: 'x-center',
+                customWrapper: '',
+            });
         }
     })
     .catch((error) => {
         console.error('Error:', error);
+        new Notify({
+            status: 'error',
+            title: 'Erro ao fazer login!',
+            text: 'Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.',
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 3000,
+            notificationsGap: null,
+            notificationsPadding: null,
+            type: 'outline',
+            position: 'x-center',
+            customWrapper: '',
+        });
     });
 }
 
-const form = document.getElementById('container')
-const username = document.getElementById('username')
-const email = document.getElementById('email')
-const password = document.getElementById('password')
-const passwordtwo = document.getElementById('password-two')
+
+const form = document.getElementById('container');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const passwordtwo = document.getElementById('password-two');
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault()
-
-    checkInputs()
-})
+    e.preventDefault();
+    checkInputs();
+});
 
 function checkInputs() {
+    const usernameValue = username.value.trim();
+    const emailValue = email.value.trim();
+    const passwordValue = password.value.trim();
+    const passwordtwoValue = passwordtwo.value.trim();
 
-    const usernameValue = username.value.trim()
-    const emailValue = email.value.trim()
-    const passwordValue = password.value.trim()
-    const passwordtwoValue = passwordtwo.value.trim()
+    let valid = true;
 
-    if(usernameValue === '') {
-        // mostrar erro
-        // add classe
-        setErrorFor(username, 'Preencha esse campo')
+    if (usernameValue === '') {
+        setErrorFor(username, 'Preencha esse campo');
+        valid = false;
     } else {
-        // adicionar a classe de sucesso
-        setSuccessFor(username)
+        setSuccessFor(username);
     }
 
-    if(emailValue === '') {
-        // mostrar erro
-        // add classe
-        setErrorFor(email, 'Preencha esse campo')
+    if (emailValue === '') {
+        setErrorFor(email, 'Preencha esse campo');
+        valid = false;
     } else if (!isEmail(emailValue)) {
-        setErrorFor(email, 'Email inválido')
+        setErrorFor(email, 'Email inválido');
+        valid = false;
     } else {
-        // adicionar a classe de sucesso
-        setSuccessFor(email)
-    }
-   
-    if(passwordValue.length === '' || passwordValue.length < 8) { 
-        setErrorFor(password, 'Senha deve ter mais que 8 caracteres')
-    } else {
-        // adicionar a classe de sucesso
-        setSuccessFor(password)
+        setSuccessFor(email);
     }
 
-    if(passwordtwoValue === '') {
-        // mostrar erro
-        // add classe
-        setErrorFor(passwordtwo, 'Preencha esse campo')
-
-    } else if(passwordValue !== passwordtwoValue) { 
-        setErrorFor(passwordtwo, 'Senhas não são iguais')
+    if (passwordValue === '' || passwordValue.length < 8) {
+        setErrorFor(password, 'Senha deve ter mais que 8 caracteres');
+        valid = false;
     } else {
-        // adicionar a classe de sucesso
-        setSuccessFor(passwordtwo)
+        setSuccessFor(password);
     }
 
+    if (passwordtwoValue === '') {
+        setErrorFor(passwordtwo, 'Preencha esse campo');
+        valid = false;
+    } else if (passwordValue !== passwordtwoValue) {
+        setErrorFor(passwordtwo, 'Senhas não são iguais');
+        valid = false;
+    } else {
+        setSuccessFor(passwordtwo);
+    }
+
+    if (valid) {
+        // Se todas as validações passarem, faça a requisição ao backend
+        fetch('http://localhost:3000/criar_usuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nome: usernameValue,
+                email: emailValue,
+                password: passwordValue,
+                confirmPassword: passwordtwoValue
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 }
 
 function setErrorFor(input, message) {
     const formControl = input.parentElement;
-    const small = formControl.querySelector('small')
+    const small = formControl.querySelector('small');
 
-    small.innerText = message
+    small.innerText = message;
 
-    formControl.className = 'input-field error'
+    formControl.className = 'input-field error';
 }
 
 function setSuccessFor(input) {
     const formControl = input.parentElement;
-
-    formControl.className = 'input-field success'
+    formControl.className = 'input-field success';
 }
 
 function isEmail(email) {
-    return /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(email)
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
