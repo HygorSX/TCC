@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Empresa</title>
+
+    <link rel="stylesheet" href="editar.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="../css/carrossel.css">
+    <link rel="stylesheet" href="../css/produtos.css">
+    <link rel="stylesheet" href="../css/avaliação.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/registrar_empresa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header> 
+        <a href="/" class="logo"><i class="ri-ancient-gate-fill"></i><span>Skooterz™</span>
+    </a>
+        </a>
+        </section>
+        <ul class="navbar">
+            
+            <li><a href="/shape">Shapes </a></li>
+            <li><a href="/skate">Skates </a></li>
+            <li><a href="/roupas">Roupas </a></li>
+            <li><a href="/acessorios">Acessórios</a></li>
+            <li><a href="/tenis">Tenis</a></li>
+            
+        </ul><!--Cabecalho-Link-->
+        <section class="main">
+            <a href="#" class="user" id="user">
+                <i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se
+            </a>
+            <section class="bx bx-menu" id="menu-icon"></section>
+            <section class="search-box">
+                <input type="text" class="search-txt" placeholder="Pesquisar">
+                <a href="#" class="search-btn">
+                    <img src="../imagens/001-loupe.png" alt="Lupa" height="20" width="20">
+                </a>
+            </section>
+            <section id="user-dropdown" class="dropdown hidden">
+                <a href="/" id="logout"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>ㅤLogout</a>
+            </section>
+        </section>
+        <script>
+            function updateUserUI() {
+        const userName = localStorage.getItem('userName');
+        const userElement = document.getElementById('user');
+        const userDropdown = document.getElementById('user-dropdown');
+        
+        if (userName) {
+            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
+            userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
+            userElement.addEventListener('click', function() {
+                userDropdown.classList.toggle('hidden');
+            });
+        } else {
+            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se`;
+            userElement.href = "/login";
+        }
+    }
+
+    
+    // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
+    window.onload = function() {
+        updateUserUI();
+    }
+        </script>
+    
+    </header>
+    <h1 class="info_company">Registro</h1>
+    <section class="edit_company">
+        <section class="image-company">
+            <label class="picture" for="picture__input" tabIndex="0">
+                <span class="picture__image"></span>
+            </label>
+            
+            <input type="file" name="picture__input" id="picture__input">
+        </section>
+            <section class="form_company">
+                <form class="form-container">
+                    <div class="form-column">
+                        <input type="text" id="nome" name="nome" placeholder="Nome Da Empresa">
+            
+                        <input type="text" id="telefone" name="telefone" placeholder="Telefone">
+            
+                        <input type="email" id="email" name="email" placeholder="Email">
+            
+                        <input type="text" id="cnpj" name="cnpj" placeholder="CPNJ">
+                    </div>
+            
+                    <div class="form-column">
+                        <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro">
+            
+                        <input type="text" id="bairro" name="bairro" placeholder="Bairro">
+            
+                        <input type="text" id="cidade" name="cidade" placeholder="Cidade">
+            
+                        <input type="password" id="senha" name="senha" placeholder="Senha">
+                    </div>
+
+                    </form>
+                    <div class="btnSalvar">
+                        <button class="salvar" type="submit">
+                            <span class="btnText">Salvar</span>
+                        </button>
+                    </div>
+        </section>
+    </section>
+
+    <section class="products_company">
+        <section class="header_products">
+            <section>
+                <h1 class="title_products">Seus Produtos</h1>
+            </section>
+            <section>
+                <button class="icon-button">
+                    <i class="fa-solid fa-plus fa-2xl"></i>
+                </button>
+            </section>
+        </section>
+        <section class="products">
+            <section class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Imagem do Produto" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-title">Nome do Produto</h2>
+                    <div class="product-actions">
+                        <button class="edit-button">Editar</button>
+                        <button class="delete-button"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <section class="frame-1">
+                <h1 class="title-modal">Dados Do Produto</h1>
+                <form class="form-modal">
+                    <input type="text" id="nome" name="nome" placeholder="Nome Do Produto">
+                    <input type="text" id="tamanho" name="tamanho" placeholder="Tamanho">
+                    <input type="text" id="marca" name="marca" placeholder="Marca">
+                    <input type="number" id="number" name="number" placeholder="Valor(R$)">
+                    <input type="text" id="description" name="description" placeholder="Descrição">
+                </form>
+                <div class="btnSalvar-modal">
+                    <button class="salvar-modal" type="submit">
+                        <span class="btnText-modal">Salvar</span>
+                    </button>
+                </div>
+            </section>
+            <section class="frame-2">
+                <section class="instruction">
+                    <h1 class="title-modal">Olá vendedor</h1>
+                    <p class="description-modal">Adicione as fotos do produto que <br>deseja anunciar na Skooterz aqui.</p>
+                </section>
+                <section class="picture_modal">
+                    <label class="imageContainer" for="fileInput" tabIndex="0">
+                        <span class="imagePlaceholder"></span>
+                    </label>
+                    <input type="file" name="fileInput" id="fileInput">
+                </section>
+            </section>
+        </div>
+    </div>
+    
+    <script src="editar.js"></script>
+    <script src="modal.js"></script>
+</body>
+</html>

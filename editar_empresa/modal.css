@@ -1,0 +1,122 @@
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#fileInput {
+    display: none;
+}
+
+.imageContainer {
+    width: 200px;
+    aspect-ratio: 4/3;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 2px dashed currentcolor;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    outline: none;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.imageContainer:hover {
+    color: #777;
+    background: #ccc;
+}
+
+.imageContainer:active {
+    border-color: turquoise;
+    color: turquoise;
+    background: #eee;
+}
+
+.imageContainer:focus {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.displayedImage {
+    max-width: 100%;
+}
+
+.form-modal {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-modal input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 400px;
+}
+
+.title-modal {
+    font-size: 32px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    color: rgb(130, 10, 209);
+}
+
+.description-modal {
+    color: #777;
+}
+
+.frame-2 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 350px;
+}
+
+.salvar-modal {
+    display: flex;
+    background-color: rgb(130, 10, 209);
+    color: #ffff;
+    height: 30px;
+    width: 70px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+}
+
+.btnSalvar-modal {
+    display: flex;
+    justify-content: flex-end;
+}
