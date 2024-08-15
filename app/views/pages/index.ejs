@@ -19,6 +19,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     
 </head>
 <body onload="updateUserUI()">
@@ -255,9 +257,12 @@
       
             <!-- Footer col-->
             <section class="footer-col">
-              <h4>Cadastre-se para mais!</h4>
+              <h4>Cadastre sua empresa para mais!</h4>
               <section class="form-sub">
                 <button id="openModalBtn">Cadastre-se</button>
+              </section>
+              <section class="form-sub">
+                <a href="login_empresa" style="color: #ffff;">Já Tenho Uma Conta</a>
               </section>
               <section class="medias-socias">
                 <a href=""><i class="fa fa-facebook"></i></a>
@@ -270,69 +275,69 @@
         </section>
       </footer>
 
-      <div id="myModal" class="modal">
-        <div class="modal-content">
+      <section id="myModal" class="modal">
+        <section class="modal-content">
             <span class="close">&times;</span>
             <!-- Formulário de registro -->
-            <div class="container">
-                <div class="registro">Registro</div>
+            <section class="container">
+                <section class="registro">Registro</section>
                 <form id="signUpFormCompany" class="signUpFormCompany">
-                    <div class="form first">
-                        <div class="details personal">
+                    <section class="form first">
+                        <section class="details personal">
                             <span class="title">Detalhes da empresa</span>
-                            <div class="fields">
-                                <div class="input-field">
+                            <section class="fields">
+                                <section class="input-field">
                                     <label>Nome Completo</label>
                                     <input type="text" placeholder="Digite o nome completo" id="name_company">
                                   <small>Error Message</small>
-                                </div>
-                                <div class="input-field">
+                                </section>
+                                <section class="input-field">
                                     <label>Telefone</label>
                                     <input type="number" placeholder="Digite seu telefone" id="tel_company">
                                   <small>Error Message</small>
-                                </div>
-                                <div class="input-field">
+                                </section>
+                                <section class="input-field">
                                     <label>Email</label>
                                     <input type="text" placeholder="Digite seu email" id="email_company">
                                   <small>Error Message</small>
-                                </div>
-                                <div class="input-field">
+                                </section>
+                                <section class="input-field">
                                     <label>CNPJ</label>
                                     <input type="number" placeholder="Digite seu CNPJ" id="CNPJ">
                                   <small>Error Message</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="details ID">
+                                </section>
+                            </section>
+                        </section>
+                        <section class="details ID">
                             <span class="title">Localização</span>
-                            <div class="fields-location">
-                                <div class="input-field">
+                            <section class="fields-location">
+                                <section class="input-field">
                                     <label>Logradouro</label>
                                     <input type="text" placeholder="Logradouro" id="logradouro">
                                   <small>Error Message</small>
-                                </div>
-                                <div class="input-field">
+                                </section>
+                                <section class="input-field">
                                     <label>Bairro</label>
                                     <input type="text" placeholder="Bairro" id="bairro">
                                   <small>Error Message</small>
-                                </div>
-                                <div class="input-field">
+                                </section>
+                                <section class="input-field">
                                     <label>Cidade</label>
                                     <input type="text" placeholder="Cidade" id="cidade">
                                   <small>Error Message</small>
-                                </div>
-                                <div class="input-field">
+                                </section>
+                                <section class="input-field">
                                     <label>Senha</label>
                                     <input type="password" placeholder="Senha" id="password_company">
                                   <small>Error Message</small>
-                                </div>
-                            </div>
+                                </section>
+                            </section>
                             <button class="nextBtn" type="submit">
                                 <span class="btnText">Registrar</span>
                                 <i class="uil uil-navigator"></i>
                             </button>
-                        </div>
-                    </div>
+                        </section>
+                    </section>
                 </form>
                 <script>
                   const form = document.getElementById('signUpFormCompany');
@@ -453,9 +458,9 @@
                       const email_company = emailCompany.value.trim();
                       const password_company = passwordCompany.value.trim();
                       const CNPJ = cnpj.value.trim();
-                      const logradouro = logradouro.value.trim();
-                      const bairro = bairro.value.trim();
-                      const cidade = cidade.value.trim();
+                      const Logradouro = logradouro.value.trim();
+                      const Bairro = bairro.value.trim();
+                      const Cidade = cidade.value.trim();
   
                       fetch('http://localhost:3000/criar_empresa', {
                           method: 'POST',
@@ -466,30 +471,81 @@
                               name_company: name_company,
                               tel_company: tel_company,
                               email_company: email_company,
-                              logradouro: logradouro,
-                              bairro: bairro,
-                              cidade: cidade,
+                              logradouro: Logradouro,
+                              bairro: Bairro,
+                              cidade: Cidade,
                               password_company: password_company,
                               CNPJ: CNPJ
                           }),
                       })
                       .then(response => response.json())
-                      .then(data => {
-                          if (data.message) {
-                              window.alert('Empresa criada com sucesso!');
-                          } else {
-                              window.alert('Erro ao criar empresa.');
-                          }
-                      })
-                      .catch((error) => {
-                          console.error('Error:', error);
-                          window.alert('Erro ao criar empresa.');
-                      });
-                  }
+                        .then(data => {
+                            if (data.message) {
+                                new Notify({
+                                    status: 'success',
+                                    title: 'Empresa Cadastrada!',
+                                    text: 'Sua empresa foi cadastrada com sucesso, faça seu login :)',
+                                    effect: 'fade',
+                                    speed: 300,
+                                    customClass: '',
+                                    customIcon: '',
+                                    showIcon: true,
+                                    showCloseButton: true,
+                                    autoclose: true,
+                                    autotimeout: 3000,
+                                    notificationsGap: null,
+                                    notificationsPadding: null,
+                                    type: 'outline',
+                                    position: 'x-center',
+                                    customWrapper: '',
+                                });
+                            } else {
+                                new Notify({
+                                    status: 'error',
+                                    title: 'Erro ao se cadastrar!',
+                                    text: data.error || 'Verifique suas informações e tente novamente!',
+                                    effect: 'fade',
+                                    speed: 300,
+                                    customClass: '',
+                                    customIcon: '',
+                                    showIcon: true,
+                                    showCloseButton: true,
+                                    autoclose: true,
+                                    autotimeout: 3000,
+                                    notificationsGap: null,
+                                    notificationsPadding: null,
+                                    type: 'outline',
+                                    position: 'x-center',
+                                    customWrapper: '',
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            new Notify({
+                                status: 'error',
+                                title: 'Erro ao se cadastrar!',
+                                text: data.error || 'Verifique suas informações e tente novamente!',
+                                effect: 'fade',
+                                speed: 300,
+                                customClass: '',
+                                customIcon: '',
+                                showIcon: true,
+                                showCloseButton: true,
+                                autoclose: true,
+                                autotimeout: 3000,
+                                notificationsGap: null,
+                                notificationsPadding: null,
+                                type: 'outline',
+                                position: 'x-center',
+                                customWrapper: '',
+                            });
+                        });
+                    }
               </script>
-            </div>
-        </div>
-    </div>
+            </section>
+        </section>
+    </section>
     
     
     <script src="../js/script.js"></script>

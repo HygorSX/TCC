@@ -126,7 +126,7 @@ function checkInputs() {
         setSuccessFor(passwordtwo);
     }
 
-    if (valid) {
+    /*if (valid) {
         // Se todas as validações passarem, faça a requisição ao backend
         fetch('http://localhost:3000/criar_usuario', {
             method: 'POST',
@@ -149,7 +149,7 @@ function checkInputs() {
         .catch(error => {
             console.error('Error:', error);
         });
-    }
+    }*/
 }
 
 function setErrorFor(input, message) {

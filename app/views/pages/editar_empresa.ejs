@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Empresa</title>
+    
+    <link rel="stylesheet" href="../css/editar.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/modal_editar_empresa.css">
+    <link rel="stylesheet" href="../css/carrossel.css">
+    <link rel="stylesheet" href="../css/produtos.css">
+    <link rel="stylesheet" href="../css/avaliação.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/registrar_empresa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+</head>
+<body onload="updateUserUI()">
+
+    <header> 
+        <a href="/" class="logo"><i class="ri-ancient-gate-fill"></i><span>Skooterz™</span>
+    </a>
+        </a>
+        </section>
+        <ul class="navbar">
+            
+            <li><a href="/shape">Shapes </a></li>
+            <li><a href="/skate">Skates </a></li>
+            <li><a href="/roupas">Roupas </a></li>
+            <li><a href="/acessorios">Acessórios</a></li>
+            <li><a href="/tenis">Tenis</a></li>
+            
+        </ul><!--Cabecalho-Link-->
+        <section class="main">
+            <a href="#" class="user" id="user">
+                <i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se
+            </a>
+            <section class="bx bx-menu" id="menu-icon"></section>
+            <section class="search-box">
+                <input type="text" class="search-txt" placeholder="Pesquisar">
+                <a href="#" class="search-btn">
+                    <img src="../imagens/001-loupe.png" alt="Lupa" height="20" width="20">
+                </a>
+            </section>
+            <section id="user-dropdown" class="dropdown hidden">
+                <a onclick="logoutUser()" id="logout"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>ㅤLogout</a>
+            </section>
+        </section>
+        <script>
+            function updateUserUI() {
+        const userName = localStorage.getItem('userName');
+        const userElement = document.getElementById('user');
+        const userDropdown = document.getElementById('user-dropdown');
+        
+        if (userName) {
+            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
+            userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
+            userElement.addEventListener('click', function() {
+                userDropdown.classList.toggle('hidden');
+            });
+        } else {
+            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se`;
+            userElement.href = "/login";
+        }
+    }
+
+    
+    // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
+    window.onload = function() {
+        updateUserUI();
+        CarregarProdutos();
+        CarregarDadosEmpresa();
+    }
+
+        </script>
+    
+    </header>
+
+    <h1 class="info_company">Registro</h1>
+
+    <section class="edit_company">
+        <section class="image-company">
+            <label class="picture" for="picture__input" tabIndex="0">
+                <span class="picture__image"></span>
+            </label>
+            
+            <input type="file" name="picture__input" id="picture__input">
+        </section>
+        
+        <section class="form_company">
+            <form class="form-container">
+                <section class="form-column">
+                    <input type="text" id="nome" name="nome" placeholder="Nome Da Empresa">
+                    <input type="text" id="telefone" name="telefone" placeholder="Telefone">
+                    <input type="email" id="email" name="email" placeholder="Email">
+                    <input type="text" id="cnpj" name="cnpj" placeholder="CPNJ">
+                </section>
+            
+                <section class="form-column">
+                    <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro">
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro">
+                    <input type="text" id="cidade" name="cidade" placeholder="Cidade">
+                    <input type="password" id="senha" name="senha" placeholder="Senha">
+                </section>
+            </form>
+            <section class="btnSalvar">
+                <button class="salvar" type="submit">
+                    <span class="btnText">Salvar</span>
+                </button>
+            </section>
+        </section>
+    </section>
+
+    <section class="products_company">
+        <section class="header_products">
+            <section>
+                <h1 class="title_products">Seus Produtos</h1>
+            </section>
+            <section>
+                <button class="icon-button">
+                    <i class="fa-solid fa-plus fa-2xl"></i>
+                </button>
+            </section>
+        </section>
+        
+        <section class="products" id="productsList">
+            
+        </section>
+    </section>
+
+    <section class="modal" id="productModal">
+        <section class="modal-content">
+            <span class="close-button">&times;</span>
+            <section class="frame-1">
+                <h1 class="title-modal">Dados Do Produto</h1>
+                <form class="form-modal">
+                    <input type="text" id="productName" name="name" placeholder="Nome Do Produto">
+                    <input type="text" id="productSize" name="size" placeholder="Tamanho">
+                    <input type="text" id="productBrand" name="brand" placeholder="Marca">
+                    <input type="number" id="productValue" name="value" placeholder="Valor(R$)">
+                    <input type="text" id="productDescription" name="description" placeholder="Descrição">
+                </form>
+                <section class="btnSalvar-modal">
+                    <button class="salvar-modal" type="button">
+                        <span class="btnText-modal">Salvar</span>
+                    </button>
+                </section>
+                
+            </section>
+            
+            <section class="frame-2">
+                <section class="instruction">
+                    <h1 class="title-modal">Olá vendedor</h1>
+                    <p class="description-modal">Adicione as fotos do produto que <br>deseja anunciar na Skooterz aqui.</p>
+                </section>
+                <section class="picture_modal">
+                    <label class="imageContainer" for="fileInput" tabIndex="0">
+                        <span class="imagePlaceholder"></span>
+                    </label>
+                    <input type="file" name="fileInput" id="fileInput">
+                </section>
+            </section>
+        </section>
+    </section>
+    <!-- Modal de Confirmação -->
+    <section class="confirmation-modal" id="confirmationModal">
+        <section class="confirmation-content">
+            <span class="close-confirmation">&times;</span>
+            <h2>Tem certeza?</h2>
+            <p>Você tem certeza de que deseja excluir este produto?</p>
+            <button class="confirm-button" style="background-color: green;">Confirmar</button>
+            <button class="cancel-button" style="background-color: #ff0000;">Cancelar</button>
+        </section>
+    </section>
+
+    <script>
+        function criarProduto() {
+            const name_product = document.getElementById('productName').value.trim();
+            const tamanho = document.getElementById('productSize').value.trim();
+            const marca = document.getElementById('productBrand').value.trim();
+            const valor = document.getElementById('productValue').value.trim();
+            const descricao = document.getElementById('productDescription').value.trim();
+            const id_empresa = JSON.parse(localStorage.getItem('empresa')).ID_EMPRESAS;
+            
+            fetch('http://localhost:3000/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id_empresa: id_empresa,
+                    name_product: name_product,
+                    tamanho: tamanho,
+                    marca: marca,
+                    valor: valor,
+                    descricao: descricao,
+                    imagem: ""
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    new Notify({
+                        status: 'success',
+                        title: 'Produto Criado!',
+                        text: 'O produto foi criado com sucesso!',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                    CarregarProdutos();
+                } else {
+                    new Notify({
+                        status: 'error',
+                        title: 'Erro ao Criar Produto!',
+                        text: 'Ocorreu um erro ao criar o produto. Por favor, tente novamente.',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                new Notify({
+                    status: 'error',
+                    title: 'Erro no Servidor!',
+                    text: 'Ocorreu um erro no servidor, por favor, tente novamente mais tarde.',
+                    effect: 'fade',
+                    speed: 300,
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    type: 'outline',
+                    position: 'x-center',
+                });
+            });
+        }
+
+
+
+        function renderProducts(products) {
+            const productsList = document.getElementById('productsList');
+            productsList.innerHTML = ''; // Limpa a lista antes de renderizar
+
+            console.log('Produtos a serem renderizados:', products); // Verifica o array de produtos
+
+            if (!products || products.length === 0) {
+                productsList.innerHTML = '<p>Nenhum produto encontrado.</p>';
+                return;
+            }
+
+            products.forEach(product => {
+                console.log('Produto:', product); // Verifica cada produto individualmente
+
+                const productCard = `
+                    <div class="product-card" data-id="${product.ID}">
+                        <img src="${product.IMAGEM || 'https://via.placeholder.com/200x200'}" alt="${product.NOME || 'Imagem do produto'}" class="product-image">
+                        <h3 class="product-title">${product.NOME || 'Nome não disponível'}</h3>
+                        <p class="product-price">R$ ${parseFloat(product.VALOR || 0).toFixed(2)}</p>
+                        <p class="product-size">Tamanho: ${product.TAMANHO || 'Não especificado'}</p>
+                        <p class="product-brand">Marca: ${product.MARCA || 'Não especificado'}</p>
+                        <p class="product-description">Descrição: ${product.DESCRICAO || 'Descrição não disponível'}</p>
+                        <div class="product-actions">
+                            <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
+                            <button class="delete-button"><i class="fa-solid fa-trash"></i> Excluir</button>
+                        </div>
+                    </div>
+                `;
+
+                productsList.innerHTML += productCard;
+            });
+        }
+
+        async function CarregarProdutos() {
+            try {
+                const usuario = JSON.parse(localStorage.getItem('empresa'));
+                const id_usuario = usuario ? usuario.ID_EMPRESAS : 1; // Substitua '1' por um valor padrão apropriado se necessário
+
+                const response = await fetch('http://localhost:3000/products_usuario', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: id_usuario
+                    }),
+                });
+
+                const data = await response.json();
+
+                console.log('Dados recebidos:', data); // Adicione este log
+
+                if (response.ok) {
+                    renderProducts(data.produtos);
+                    new Notify({
+                        status: 'info',
+                        title: 'Produtos Carregados!',
+                        text: 'Os produtos foram carregados com sucesso.',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 1500,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                } else {
+                    console.error('Erro:', data.error);
+                    new Notify({
+                        status: 'error',
+                        title: 'Erro ao Buscar Produtos!',
+                        text: 'Ocorreu um erro ao buscar os produtos. Por favor, tente novamente.',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao carregar os produtos:', error);
+                new Notify({
+                    status: 'error',
+                    title: 'Erro ao Carregar Produtos!',
+                    text: 'Ocorreu um erro ao carregar os produtos. Por favor, tente novamente mais tarde.',
+                    effect: 'fade',
+                    speed: 300,
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    type: 'outline',
+                    position: 'x-center',
+                });
+            }
+        }
+
+        document.addEventListener('click', function (event) {
+            if (event.target.closest('.delete-button')) {
+                const productCard = event.target.closest('.product-card');
+                const productId = productCard.getAttribute('data-id');
+
+                // Exibir o modal de confirmação
+                const confirmationModal = document.getElementById('confirmationModal');
+                confirmationModal.style.display = 'flex';
+
+                // Botão de confirmação
+                document.querySelector('.confirm-button').addEventListener('click', function () {
+                    excluirProduto(productId, productCard);
+                    confirmationModal.style.display = 'none'; // Fechar o modal após confirmação
+                });
+
+                // Botão de cancelamento
+                document.querySelector('.cancel-button').addEventListener('click', function () {
+                    confirmationModal.style.display = 'none'; // Fechar o modal ao cancelar
+                });
+
+                // Fechar o modal ao clicar no 'x'
+                document.querySelector('.close-confirmation').addEventListener('click', function () {
+                    confirmationModal.style.display = 'none'; // Fechar o modal ao clicar no 'x'
+                });
+            }
+        });
+
+        async function excluirProduto(id, productCard) {
+            try {
+                const response = await fetch(`http://localhost:3000/products/${id}`, {
+                    method: 'DELETE',
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    new Notify({
+                        status: 'success',
+                        title: 'Produto Deletado!',
+                        text: 'O produto foi deletado com sucesso.',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                    productCard.remove(); // Remove o produto da lista no frontend
+                } else {
+                    console.error('Erro:', data.error);
+                    new Notify({
+                        status: 'error',
+                        title: 'Erro ao Deletar Produto!',
+                        text: 'Ocorreu um erro ao deletar o produto. Por favor, tente novamente.',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao excluir o produto:', error);
+                new Notify({
+                    status: 'error',
+                    title: 'Erro ao Excluir Produto!',
+                    text: 'Ocorreu um erro ao excluir o produto. Por favor, tente novamente mais tarde.',
+                    effect: 'fade',
+                    speed: 300,
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    type: 'outline',
+                    position: 'x-center',
+                });
+            }
+        }
+
+
+        document.addEventListener('click', function (event) {
+            if (event.target.closest('.edit-button')) {
+                const productCard = event.target.closest('.product-card');
+                const productId = productCard.getAttribute('data-id');
+
+                // Preencher o modal com as informações do produto
+                preencherModal(productId, productCard);
+
+                // Mostrar o modal
+                document.getElementById('productModal').style.display = 'block';
+            }
+        });
+
+        function preencherModal(id, productCard) {
+            const name = productCard.querySelector('.product-title').innerText;
+            const size = productCard.querySelector('.product-size').innerText.replace('Tamanho: ', '');
+            const brand = productCard.querySelector('.product-brand').innerText.replace('Marca: ', '');
+            const value = productCard.querySelector('.product-price').innerText.replace('R$ ', '');
+            const description = productCard.querySelector('.product-description').innerText.replace('Descrição: ', '');
+
+            // Preencher os campos do modal
+            document.getElementById('productName').value = name;
+            document.getElementById('productSize').value = size;
+            document.getElementById('productBrand').value = brand;
+            document.getElementById('productValue').value = value;
+            document.getElementById('productDescription').value = description;
+
+            // Salvar o ID do produto em um atributo de dados no botão de salvar
+            document.querySelector('.salvar-modal').setAttribute('data-id', id);
+        }
+
+        document.querySelector('.salvar-modal').addEventListener('click', function () {
+            const productId = this.getAttribute('data-id');
+
+            if (productId) {
+                atualizarProduto(productId);
+            } else {
+                criarProduto();
+            }
+        });
+
+        async function atualizarProduto(id) {
+            const name_product = document.getElementById('productName').value.trim();
+            const tamanho = document.getElementById('productSize').value.trim();
+            const marca = document.getElementById('productBrand').value.trim();
+            const valor = document.getElementById('productValue').value.trim();
+            const descricao = document.getElementById('productDescription').value.trim();
+
+            try {
+                const response = await fetch(`http://localhost:3000/products/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name_product: name_product,
+                        tamanho: tamanho,
+                        marca: marca,
+                        valor: valor,
+                        descricao: descricao,
+                        imagem: "" // Aqui você pode adicionar a lógica para enviar a imagem, se necessário
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    new Notify({
+                        status: 'success',
+                        title: 'Produto Atualizado!',
+                        text: 'O produto foi atualizado com sucesso.',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                    CarregarProdutos();
+                    document.getElementById('productModal').style.display = 'none'; // Fecha o modal
+                    document.querySelector('.salvar-modal').removeAttribute('data-id'); // Remove o ID do produto do botão de salvar
+                } else {
+                    console.error('Erro:', data.error);
+                    new Notify({
+                        status: 'error',
+                        title: 'Erro ao Atualizar Produto!',
+                        text: 'Ocorreu um erro ao atualizar o produto. Por favor, tente novamente.',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao atualizar o produto:', error);
+                new Notify({
+                    status: 'error',
+                    title: 'Erro ao Atualizar Produto!',
+                    text: 'Ocorreu um erro ao atualizar o produto. Por favor, tente novamente mais tarde.',
+                    effect: 'fade',
+                    speed: 300,
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    type: 'outline',
+                    position: 'x-center',
+                });
+            }
+        }
+
+        document.querySelector('.close-button').addEventListener('click', function () {
+            document.getElementById('productModal').style.display = 'none';
+            document.querySelector('.salvar-modal').removeAttribute('data-id');
+        });
+
+        async function CarregarDadosEmpresa() {
+            try {
+                const empresa = JSON.parse(localStorage.getItem('empresa'));
+                const id_empresa = empresa ? empresa.ID_EMPRESAS : null;
+
+                if (id_empresa) {
+                    const response = await fetch(`http://localhost:3000/empresa/${id_empresa}`);
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        document.getElementById('nome').value = data.NOME_EMPRESAS || '';
+                        document.getElementById('telefone').value = data.TELEFONE_EMPRESAS || '';
+                        document.getElementById('email').value = data.EMAIL_EMPRESAS || '';
+                        document.getElementById('cnpj').value = data.CNPJ_EMPRESAS || '';
+                        document.getElementById('logradouro').value = data.LOGRADOURO_EMPRESAS || '';
+                        document.getElementById('bairro').value = data.BAIRRO_EMPRESAS || '';
+                        document.getElementById('cidade').value = data.CIDADE_EMPRESAS || '';
+                        document.getElementById('senha').value = data.PASSWORD_EMPRESAS || '';
+                    } else {
+                        console.error('Erro ao obter os dados da empresa:', data.error);
+                    }
+                } else {
+                    console.error('ID da empresa não encontrado no localStorage.');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar os dados da empresa:', error);
+            }
+        }
+
+    </script>
+    <script src="../js/editar.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/frontend.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

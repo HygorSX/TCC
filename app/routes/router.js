@@ -36,6 +36,11 @@ router.get("/tenis", function (req, res) {
 router.get("/buypagev2", function (req, res) {
     res.render("pages/buypagev2",{pagina:"pages/buypagev2"});
 });
-
+router.get("/editar_empresa", function (req, res) {
+    res.render("pages/editar_empresa",{pagina:"pages/editar_empresa"});
+});
+router.get("/login_empresa", function (req, res) {
+    res.render("pages/login_empresa",{pagina:"pages/login_empresa"});
+});
 
 module.exports = router;
