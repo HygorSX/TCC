@@ -1,19 +1,27 @@
 const Product = require('../models/Product');
 const pool = require("../other/conexao");
+const fs = require('fs');
 
 class ProductController{
     static Criar(req, res) {
         const { id_empresa, name_product, tamanho, marca, valor, descricao, imagem } = req.body;
         const sql = 'INSERT INTO PRODUCTS (ID_EMPRESAS, NOME, TAMANHO, MARCA, VALOR, DESCRICAO, IMAGEM) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        pool.query(sql, [id_empresa, name_product, tamanho, marca, valor, descricao, imagem], (err, results) => {
-            
-            if (err) {
-                res.status(500).json({ error: 'Erro no banco de dados.' });
+        fs.writeFile("./app/public/imagens/produto-" +  + ".jpg", imagem.split(",")[1], {encoding: "base64"}, (err) => {
+            if(err){
+                res.status(500).json({ error: 'Erro na imagem' });
             }
             else{
-                res.status(201).json({ message: "Produto criado com sucesso", id: results.insertId });
+                pool.query(sql, [id_empresa, name_product, tamanho, marca, valor, descricao, imagem], (err, results) => {
+            
+                    if (err) {
+                        res.status(500).json({ error: 'Erro no banco de dados.' });
+                    }
+                    else{
+                        res.status(201).json({ message: "Produto criado com sucesso", id: results.insertId });
+                    }
+                });
             }
-        });
+        })
     }
 
     static MostrarTodos(req,  res) {

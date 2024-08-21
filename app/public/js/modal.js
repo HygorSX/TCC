@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    fileInput.addEventListener("change", function (e) {
+    /*fileInput.addEventListener("change", function (e) {
         const target = e.target;
         const file = target.files[0];
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             imagePlaceholder.innerHTML = defaultText;
         }
-    });
+    });*/
 });
 
 
@@ -67,6 +67,7 @@ const fileInput = document.querySelector("#fileInput");
           const img = document.createElement("img");
           img.src = result;
           img.classList.add("displayedImage");
+          img.id = "imgProduto";
 
           imagePlaceholder.innerHTML = "";
           imagePlaceholder.appendChild(img);

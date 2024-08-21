@@ -87,28 +87,20 @@
     <h1 class="info_company">Registro</h1>
 
     <section class="edit_company">
-        <section class="image-company">
-            <label class="picture" for="picture__input" tabIndex="0">
-                <span class="picture__image"></span>
-            </label>
-            
-            <input type="file" name="picture__input" id="picture__input">
-        </section>
-        
         <section class="form_company">
             <form class="form-container">
                 <section class="form-column">
-                    <input type="text" id="nome" name="nome" placeholder="Nome Da Empresa">
-                    <input type="text" id="telefone" name="telefone" placeholder="Telefone">
-                    <input type="email" id="email" name="email" placeholder="Email">
-                    <input type="text" id="cnpj" name="cnpj" placeholder="CPNJ">
+                    <input type="text" id="nome" name="nome" placeholder="Nome Da Empresa" readonly>
+                    <input type="text" id="telefone" name="telefone" placeholder="Telefone" readonly>
+                    <input type="email" id="email" name="email" placeholder="Email" readonly>
+                    <input type="text" id="cnpj" name="cnpj" placeholder="CPNJ" readonly>
                 </section>
             
                 <section class="form-column">
-                    <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro">
-                    <input type="text" id="bairro" name="bairro" placeholder="Bairro">
-                    <input type="text" id="cidade" name="cidade" placeholder="Cidade">
-                    <input type="password" id="senha" name="senha" placeholder="Senha">
+                    <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" readonly>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" readonly>
+                    <input type="text" id="cidade" name="cidade" placeholder="Cidade" readonly>
+                    <input type="password" id="senha" name="senha" placeholder="Senha" readonly>
                 </section>
             </form>
             <section class="btnSalvar">
@@ -189,6 +181,29 @@
             const valor = document.getElementById('productValue').value.trim();
             const descricao = document.getElementById('productDescription').value.trim();
             const id_empresa = JSON.parse(localStorage.getItem('empresa')).ID_EMPRESAS;
+            const imgProd = document.getElementById('imgProduto');
+            let imgBase64 = "";
+
+            if(imgProd){
+                imgBase64 = imgProd.src
+            }
+            
+            if(!imgBase64){
+                new Notify({
+                        status: 'error',
+                        title: 'Erro',
+                        text: 'Favor selecionar uma imagem',
+                        effect: 'fade',
+                        speed: 300,
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        type: 'outline',
+                        position: 'x-center',
+                    });
+                    return
+            }
             
             fetch('http://localhost:3000/products', {
                 method: 'POST',
@@ -202,7 +217,7 @@
                     marca: marca,
                     valor: valor,
                     descricao: descricao,
-                    imagem: ""
+                    imagem: imgBase64
                 }),
             })
             .then(response => response.json())
@@ -221,7 +236,8 @@
                         type: 'outline',
                         position: 'x-center',
                     });
-                    CarregarProdutos();
+                    window.location.reload();
+                    //CarregarProdutos();
                 } else {
                     new Notify({
                         status: 'error',
@@ -368,23 +384,38 @@
                 const confirmationModal = document.getElementById('confirmationModal');
                 confirmationModal.style.display = 'flex';
 
+                // Remover event listeners anteriores para evitar múltiplos disparos
+                const confirmButton = document.querySelector('.confirm-button');
+                const cancelButton = document.querySelector('.cancel-button');
+                const closeButton = document.querySelector('.close-confirmation');
+
+                // Clonar os botões para remover todos os event listeners
+                const newConfirmButton = confirmButton.cloneNode(true);
+                const newCancelButton = cancelButton.cloneNode(true);
+                const newCloseButton = closeButton.cloneNode(true);
+
+                confirmButton.parentNode.replaceChild(newConfirmButton, confirmButton);
+                cancelButton.parentNode.replaceChild(newCancelButton, cancelButton);
+                closeButton.parentNode.replaceChild(newCloseButton, closeButton);
+
                 // Botão de confirmação
-                document.querySelector('.confirm-button').addEventListener('click', function () {
+                newConfirmButton.addEventListener('click', function () {
                     excluirProduto(productId, productCard);
                     confirmationModal.style.display = 'none'; // Fechar o modal após confirmação
                 });
 
                 // Botão de cancelamento
-                document.querySelector('.cancel-button').addEventListener('click', function () {
+                newCancelButton.addEventListener('click', function () {
                     confirmationModal.style.display = 'none'; // Fechar o modal ao cancelar
                 });
 
                 // Fechar o modal ao clicar no 'x'
-                document.querySelector('.close-confirmation').addEventListener('click', function () {
+                newCloseButton.addEventListener('click', function () {
                     confirmationModal.style.display = 'none'; // Fechar o modal ao clicar no 'x'
                 });
             }
         });
+
 
         async function excluirProduto(id, productCard) {
             try {
@@ -597,6 +628,7 @@
 
     </script>
     <script src="../js/editar.js"></script>
+    <script src="../js/jquery.js"></script>
     <script src="../js/modal.js"></script>
     <script src="../js/frontend.js"></script>
     <script src="../js/script.js"></script>
