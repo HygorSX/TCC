@@ -290,7 +290,7 @@
 
                 const productCard = `
                     <div class="product-card" data-id="${product.ID}">
-                        <img src="${product.IMAGEM || 'https://via.placeholder.com/200x200'}" alt="${product.NOME || 'Imagem do produto'}" class="product-image">
+                        <img src="${product.IMAGEM ? ('http://localhost:3000/imagens_produto/' + product.IMAGEM) : 'https://via.placeholder.com/200x200'}" alt="${product.NOME || 'Imagem do produto'}" class="product-image">
                         <h3 class="product-title">${product.NOME || 'Nome não disponível'}</h3>
                         <p class="product-price">R$ ${parseFloat(product.VALOR || 0).toFixed(2)}</p>
                         <p class="product-size">Tamanho: ${product.TAMANHO || 'Não especificado'}</p>

@@ -4,13 +4,16 @@ const fs = require('fs');
 
 class ProductController{
     static Criar(req, res) {
-        const { id_empresa, name_product, tamanho, marca, valor, descricao, imagem } = req.body;
+        let { id_empresa, name_product, tamanho, marca, valor, descricao, imagem } = req.body;
         const sql = 'INSERT INTO PRODUCTS (ID_EMPRESAS, NOME, TAMANHO, MARCA, VALOR, DESCRICAO, IMAGEM) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        fs.writeFile("./app/public/imagens/produto-" +  + ".jpg", imagem.split(",")[1], {encoding: "base64"}, (err) => {
+        const nome_foto = "produto-" + (new Date()).getTime() + ".jpg";
+        const caminho_foto = "./app/imagens_produto/" + nome_foto;
+        fs.writeFile(caminho_foto, imagem.split(",")[1], {encoding: "base64"}, (err) => {
             if(err){
                 res.status(500).json({ error: 'Erro na imagem' });
             }
             else{
+                imagem = nome_foto;
                 pool.query(sql, [id_empresa, name_product, tamanho, marca, valor, descricao, imagem], (err, results) => {
             
                     if (err) {

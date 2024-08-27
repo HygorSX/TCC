@@ -33,5 +33,6 @@ router.delete('/products/:id', ProductController.Deletar);
 
 
 
+
 module.exports = router;
 

@@ -5,6 +5,7 @@ const port = 80;
 const portApi = 3000;
 const cors = require("cors");
 const pool = require('./app/other/conexao');
+const path = require("path")
 /*var session = require("express-session");*/
 
 // Configurando cors para evitar erros
@@ -31,6 +32,7 @@ app.use("/", rotas);
 
 var rotasApi = require("./app/routes/routerApi");
 api.use("/", rotasApi);
+api.use("/imagens_produto", express.static(path.join(__dirname, "app","imagens_produto")))
 
 app.listen(port, () => {
   console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`);
