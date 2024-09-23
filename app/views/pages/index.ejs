@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     
 </head>
-<body onload="updateUserUI()">
+
+<body>
 
     <header> 
         <a href="/" class="logo"><i class="ri-ancient-gate-fill"></i><span>Skooterz™</span>
@@ -40,7 +41,7 @@
             
         </ul><!--Cabecalho-Link-->
         <section class="main">
-            <a href="#" class="user" id="user">
+            <a href="./login" class="user" id="user">
                 <i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se
             </a>
             <section class="bx bx-menu" id="menu-icon"></section>
@@ -125,39 +126,8 @@
     </section>
     
     <h1>Produtos que <a class="todos">todos</a> estão de olho</h1>
-    <section class="produtos">
-        <section class="produto-card">
-        <img src="../imagens/Skate_1.png" alt="imagem do produto">
-        <h2><a href="#">Titulo do produto</a></h2>
-        <p class="preço">Preço original: R$20,99</p>
-        <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-        <p class="desconto"> Você economiza: R$ 10.00</p>
-        <a href="#" class="buy">Compre Agora</a>
-        </section>
-        <section class="produto-card">
-            <img src="../imagens/Skate_2.jpg" alt="imagem do produto">
-            <h2><a href="#">Titulo do produto</a></h2>
-            <p class="preço">Preço original: R$20,99</p>
-            <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-            <p class="desconto"> Você economiza: R$ 10.00</p>
-            <a href="#" class="buy">Compre Agora</a>
-            </section>
-            <section class="produto-card">
-                <img src="../imagens/Skate_3.jpg" alt="imagem do produto">
-                <h2><a href="#">Titulo do produto</a></h2>
-                <p class="preço">Preço original: R$20,99</p>
-                <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-                <p class="desconto"> Você economiza: R$ 10.00</p>
-                <a href="#" class="buy">Compre Agora</a>
-                </section>
-                <section class="produto-card">
-                    <img src="../imagens/Skate_4.jpg" alt="imagem do produto">
-                    <h2><a href="#">Titulo do produto</a></h2>
-                    <p class="preço">Preço original: R$20,99</p>
-                    <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-                    <p class="desconto"> Você economiza: R$ 10.00</p>
-                    <a href="#" class="buy">Compre Agora</a>
-                    </section>
+    <section id="produtos" class="produtos">
+        
     </section>
     <h1 class="titulo-promo">Peças em <a class="promo">promoção</a></h1>
     <section class="produtos">
@@ -546,8 +516,6 @@
             </section>
         </section>
     </section>
-    
-    
     <script src="../js/script.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/app.js"></script>

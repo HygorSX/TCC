@@ -41,6 +41,17 @@ class ProductController{
         });
     }
 
+    static MostrarTodosHome(req, res) {
+        const sql = 'SELECT * FROM PRODUCTS';
+        pool.query(sql, (err, results) => {
+            if (err) {
+                res.status(500).json({ error: 'Erro no banco de dados.' });
+            } else {
+                res.status(200).json({ message: "Produtos buscados com sucesso", produtos: results });
+            }
+        });
+    }
+
     static Deletar(req, res) {
         const { id } = req.params;
         const sql = 'DELETE FROM PRODUCTS WHERE ID = ?';

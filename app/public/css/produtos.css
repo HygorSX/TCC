@@ -1,133 +1,128 @@
-:root{
+:root {
     --font-corpo: 'Poppins', sans-serif;
 }
-h1{
+
+h1 {
     padding-top: 3vh;
     text-align: center;
-    font-family: var(--font-corpo);;
+    font-family: var(--font-corpo);
 }
-.titulo-promo{
+
+.titulo-promo {
     padding-top: 7vh;
     text-align: center;
 }
-.todos, .promo{
+
+.todos, .promo {
     color: rgb(130, 10, 209);
     font-family: var(--font-corpo);
 }
-.produtos{
+
+.produtos {
     padding-top: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    padding-left: 20px;  /* Espaçamento nas laterais */
+    padding-right: 20px; /* Espaçamento nas laterais */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Define 5 colunas */
     gap: 25px;
     text-align: center;
-
+    justify-content: center;
 }
-.produto-card, .tenis-card{
+
+.produto-card, .tenis-card {
     padding-bottom: 30px;
-    box-shadow: 0px 0px 15px 2px rgb(241 241 241);
-
+    box-shadow: 0px 0px 15px 2px rgb(241, 241, 241);
     background-color: white;
-    
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px; /* Largura máxima dos cards para evitar que fiquem muito largos */
+    margin: 0 auto;   /* Centraliza os cards */
 }
 
-.produto-card img{
-    padding: 25px;
-    max-width: 300px;
+.produto-card img, .tenis-card img {
+    padding: 15px;
+    width: 100%;
+    max-width: 200px; /* Largura máxima da imagem */
+    height: auto; /* Mantém a proporção da imagem */
     border-radius: 15px;
-
 }
-.tenis-card img{
-    padding: 25px;
-    max-width: 300px;
-    border-radius: 15px;
 
-}
 .produto-card a, .tenis-card a {
     color: black;
     text-decoration: none;
     font-family: var(--font-corpo);
 }
-.produto-card p{
+
+.produto-card p, .tenis-card p {
     line-height: 1.5;
     font-family: var(--font-corpo);
 }
-.preço{
+
+.preço {
     color: grey;
     text-transform: uppercase;
     font-family: var(--font-corpo);
-
 }
-.preço-atual span.preço-atual{
+
+.preço-atual span.preço-atual {
     font-weight: bold;
     text-decoration: underline;
     color: black;
     font-family: var(--font-corpo);
-    
-
 }
-p.desconto{
+
+p.desconto {
     color: green;
     padding-bottom: 20px;
 }
-a.buy{
+
+a.buy {
     border: 1px solid rgb(130, 10, 209);
     border-radius: 15px;
     text-transform: uppercase;
     padding: 4% 8%;
     background-color: rgb(130, 10, 209);
     color: white;
-    font-family: var(--font-corpo)
+    font-family: var(--font-corpo);
 }
-a.buy:hover{
-    border-color: solid rgb(130, 10, 209);
+
+a.buy:hover {
+    border-color: rgb(130, 10, 209);
     background-color: white;
     color: rgb(130, 10, 209);
     transition: 0.3s;
 }
 
-.produto-card img:hover{
+.produto-card img:hover, .tenis-card img:hover {
     transform: scale(1.05);
-    transition: .3s;
-}
-.tenis-card img:hover{
-    transform: scale(1.02);
-    transition: .3s;
+    transition: 0.3s;
 }
 
-@media screen and (max-width: 625px){
-
-    .produto-card img{
-        max-width: 173px;
+@media screen and (max-width: 625px) {
+    .produto-card img, .tenis-card img {
+        max-width: 150px; /* Ajusta a largura da imagem em telas menores */
     }
-    .produto-card a{
+
+    .produto-card a, .tenis-card a {
         font-size: 15px;
     }
-    h2{
+
+    h2 {
         font-size: 1.1rem;
     }
-    .produtos{
-        gap: 12.5px;
-       
-    }
-    .tenis-card img{
-        max-width: 173px;
-    }
-    h2{
-        font-size: 1.1rem;
-    }
-    .preço, .preço-atual, .desconto{
+
+    .preço, .preço-atual, .desconto {
         font-size: 0.7rem;
         padding: 0 4px;
     }
-    .produtos{
+
+    .produtos {
         gap: 12.5px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajusta colunas em telas menores */
     }
-    a.buy{
+
+    a.buy {
         font-size: 12px;
     }
 }
-
