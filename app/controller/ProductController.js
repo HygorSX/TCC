@@ -4,17 +4,17 @@ const fs = require('fs');
 
 class ProductController{
     static Criar(req, res) {
-        let { id_empresa, name_product, tamanho, marca, valor, descricao, imagem } = req.body;
-        const sql = 'INSERT INTO PRODUCTS (ID_EMPRESAS, NOME, TAMANHO, MARCA, VALOR, DESCRICAO, IMAGEM) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        let { id_empresa, name_product, tamanho, marca, valor, descricao, imagem, url_produto } = req.body;
+        const sql = 'INSERT INTO PRODUCTS (ID_EMPRESAS, NOME, TAMANHO, MARCA, VALOR, DESCRICAO, IMAGEM, URL_PRODUTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         const nome_foto = "produto-" + (new Date()).getTime() + ".jpg";
-        const caminho_foto = "./app/imagens_produto/" + nome_foto;
+        const caminho_foto = "./app/public/imagens_produto/" + nome_foto;
         fs.writeFile(caminho_foto, imagem.split(",")[1], {encoding: "base64"}, (err) => {
             if(err){
                 res.status(500).json({ error: 'Erro na imagem' });
             }
             else{
                 imagem = nome_foto;
-                pool.query(sql, [id_empresa, name_product, tamanho, marca, valor, descricao, imagem], (err, results) => {
+                pool.query(sql, [id_empresa, name_product, tamanho, marca, valor, descricao, imagem, url_produto], (err, results) => {
             
                     if (err) {
                         res.status(500).json({ error: 'Erro no banco de dados.' });
@@ -71,10 +71,10 @@ class ProductController{
 
     static Atualizar(req, res) {
         const { id } = req.params;
-        const { name_product, tamanho, marca, valor, descricao, imagem } = req.body;
-        const sql = 'UPDATE PRODUCTS SET NOME = ?, TAMANHO = ?, MARCA = ?, VALOR = ?, DESCRICAO = ?, IMAGEM = ? WHERE ID = ?';
+        const { name_product, tamanho, marca, valor, descricao, imagem, url_produto } = req.body;
+        const sql = 'UPDATE PRODUCTS SET NOME = ?, TAMANHO = ?, MARCA = ?, VALOR = ?, DESCRICAO = ?, IMAGEM = ?, URL_PRODUTO = ? WHERE ID = ?';
 
-        pool.query(sql, [name_product, tamanho, marca, valor, descricao, imagem, id], (err, results) => {
+        pool.query(sql, [name_product, tamanho, marca, valor, descricao, imagem, url_produto, id ], (err, results) => {
             if (err) {
                 res.status(500).json({ error: 'Erro no banco de dados.' });
             } else {

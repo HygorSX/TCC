@@ -139,6 +139,7 @@
                     <input type="text" id="productBrand" name="brand" placeholder="Marca">
                     <input type="number" id="productValue" name="value" placeholder="Valor(R$)">
                     <input type="text" id="productDescription" name="description" placeholder="Descrição">
+                    <input type="text" id="productURL" name="url_produto" placeholder="URL do produto">
                 </form>
                 <section class="btnSalvar-modal">
                     <button class="salvar-modal" type="button">
@@ -180,6 +181,7 @@
             const marca = document.getElementById('productBrand').value.trim();
             const valor = document.getElementById('productValue').value.trim();
             const descricao = document.getElementById('productDescription').value.trim();
+            const URL = document.getElementById('productURL').value.trim();
             const id_empresa = JSON.parse(localStorage.getItem('empresa')).ID_EMPRESAS;
             const imgProd = document.getElementById('imgProduto');
             let imgBase64 = "";
@@ -217,6 +219,7 @@
                     marca: marca,
                     valor: valor,
                     descricao: descricao,
+                    url_produto: URL,
                     imagem: imgBase64
                 }),
             })
@@ -290,12 +293,13 @@
 
                 const productCard = `
                     <div class="product-card" data-id="${product.ID}">
-                        <img src="${product.IMAGEM ? ('http://localhost:3000/imagens_produto/' + product.IMAGEM) : 'https://via.placeholder.com/200x200'}" alt="${product.NOME || 'Imagem do produto'}" class="product-image">
+                        <img src="${product.IMAGEM ? ('/imagens_produto/' + product.IMAGEM) : 'https://via.placeholder.com/200x200'}" alt="${product.NOME || 'Imagem do produto'}" class="product-image">
                         <h3 class="product-title">${product.NOME || 'Nome não disponível'}</h3>
                         <p class="product-price">R$ ${parseFloat(product.VALOR || 0).toFixed(2)}</p>
                         <p class="product-size">Tamanho: ${product.TAMANHO || 'Não especificado'}</p>
                         <p class="product-brand">Marca: ${product.MARCA || 'Não especificado'}</p>
                         <p class="product-description">Descrição: ${product.DESCRICAO || 'Descrição não disponível'}</p>
+                        <p class="product-url">URL: <a href="${product.URL_PRODUTO || '#'}" target="_blank">${product.URL_PRODUTO ? product.URL_PRODUTO : 'URL não disponível'}</a></p>
                         <div class="product-actions">
                             <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
                             <button class="delete-button"><i class="fa-solid fa-trash"></i> Excluir</button>
@@ -489,57 +493,89 @@
         });
 
         function preencherModal(id, productCard) {
-            const name = productCard.querySelector('.product-title').innerText;
-            const size = productCard.querySelector('.product-size').innerText.replace('Tamanho: ', '');
-            const brand = productCard.querySelector('.product-brand').innerText.replace('Marca: ', '');
-            const value = productCard.querySelector('.product-price').innerText.replace('R$ ', '');
-            const description = productCard.querySelector('.product-description').innerText.replace('Descrição: ', '');
+        const name = productCard.querySelector('.product-title').innerText;
+        const size = productCard.querySelector('.product-size').innerText.replace('Tamanho: ', '');
+        const brand = productCard.querySelector('.product-brand').innerText.replace('Marca: ', '');
+        const value = productCard.querySelector('.product-price').innerText.replace('R$ ', '');
+        const description = productCard.querySelector('.product-description').innerText.replace('Descrição: ', '');
+        const URL = productCard.querySelector('.product-url a').getAttribute('href'); // Corrige para pegar a URL corretamente
+        const imageSrc = productCard.querySelector('.product-image').src;
 
-            // Preencher os campos do modal
-            document.getElementById('productName').value = name;
-            document.getElementById('productSize').value = size;
-            document.getElementById('productBrand').value = brand;
-            document.getElementById('productValue').value = value;
-            document.getElementById('productDescription').value = description;
+        // Preencher os campos do modal
+        document.getElementById('productName').value = name;
+        document.getElementById('productSize').value = size;
+        document.getElementById('productBrand').value = brand;
+        document.getElementById('productValue').value = value;
+        document.getElementById('productDescription').value = description;
+        document.getElementById('productURL').value = URL;
 
-            // Salvar o ID do produto em um atributo de dados no botão de salvar
-            document.querySelector('.salvar-modal').setAttribute('data-id', id);
+        // Preencher a pré-visualização da imagem no modal
+        const imagePlaceholder = document.querySelector('.imagePlaceholder');
+        if (imagePlaceholder) {
+            imagePlaceholder.style.backgroundImage = `url(${imageSrc})`;
         }
 
-        document.querySelector('.salvar-modal').addEventListener('click', function () {
-            const productId = this.getAttribute('data-id');
+        // Salvar o ID do produto no botão de salvar
+        document.querySelector('.salvar-modal').setAttribute('data-id', id);
+    }
 
-            if (productId) {
-                atualizarProduto(productId);
-            } else {
-                criarProduto();
-            }
+    document.querySelector('.salvar-modal').addEventListener('click', function () {
+        const productId = this.getAttribute('data-id');
+
+        if (productId) {
+            atualizarProduto(productId);
+        } else {
+            criarProduto();
+        }
+    });
+
+        function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+    async function atualizarProduto(id) {
+    const name_product = document.getElementById('productName').value.trim();
+    const tamanho = document.getElementById('productSize').value.trim();
+    const marca = document.getElementById('productBrand').value.trim();
+    const valor = document.getElementById('productValue').value.trim();
+    const descricao = document.getElementById('productDescription').value.trim();
+    const URL = document.getElementById('productURL').value.trim();
+    const fileInput = document.getElementById('fileInput');
+    let imgBase64 = "";
+
+    // Verifica se uma nova imagem foi selecionada
+    if (fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        imgBase64 = await getBase64(file); // Função para converter a imagem em base64
+    } else {
+        // Caso a imagem não tenha sido alterada, pega a imagem existente no placeholder
+        const imagePlaceholder = document.querySelector('.imagePlaceholder');
+        imgBase64 = imagePlaceholder.style.backgroundImage.slice(5, -2); // Remove o 'url("")' para pegar o valor correto
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name_product: name_product,
+                tamanho: tamanho,
+                marca: marca,
+                valor: valor,
+                descricao: descricao,
+                url_produto: URL,
+                imagem: imgBase64 // Envia a imagem atual ou a nova imagem
+            }),
         });
 
-        async function atualizarProduto(id) {
-            const name_product = document.getElementById('productName').value.trim();
-            const tamanho = document.getElementById('productSize').value.trim();
-            const marca = document.getElementById('productBrand').value.trim();
-            const valor = document.getElementById('productValue').value.trim();
-            const descricao = document.getElementById('productDescription').value.trim();
-
-            try {
-                const response = await fetch(`http://localhost:3000/products/${id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name_product: name_product,
-                        tamanho: tamanho,
-                        marca: marca,
-                        valor: valor,
-                        descricao: descricao,
-                        imagem: "" // Aqui você pode adicionar a lógica para enviar a imagem, se necessário
-                    }),
-                });
-
-                const data = await response.json();
+        const data = await response.json();
 
                 if (response.ok) {
                     new Notify({
