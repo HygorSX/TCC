@@ -112,7 +112,7 @@ async function carregarProdutos() {
                     <h2><a href="#">${produto.NOME}</a></h2>
                     <p class="preco">Preço: R$ ${produto.VALOR}</p>
                     <br>
-                    <a href="#" class="buy">Compre Agora</a>
+                    <a href="/buypage?nome=${produto.NOME}&preco=${produto.VALOR}&descricao=${produto.DESCRICAO}&tamanho=${produto.TAMANHO}&imagem=/imagens_produto/${produto.IMAGEM}&link=${produto.URL_PRODUTO}" class="buy">Compre Agora</a>
                 </section>
             `;
             produtosContainer.innerHTML += produtoCard;

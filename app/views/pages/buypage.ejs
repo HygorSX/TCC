@@ -59,118 +59,36 @@
         <section>
             <section class="container">
                 <section class="left-side">
-                <section class="items">
-                    <section class="select-image" id="select-image">
-                        <img src="../imagens/produto_1.avif">
+                    <section class="items">
+                        <section class="select-image" id="select-image">
+                            <img src="../imagens/produto_1.avif" alt="Imagem do produto Moletom Capuz Graphic">
                         </section>
-    
-                        <section class="thumbnails">
-                            <section class="thumbnail">
-                                <img src="../imagens/images_buys/CapuzMoletom.avif">
-                                </section>
-    
-                                <section class="thumbnail">
-                                    <img src="../imagens/images_buys/CorpoTodo.avif">
-                                    </section>
-    
-                                    <section class="thumbnail">
-                                        <img src="../imagens/images_buys/CostaMoletom.avif">
-                                    </section>
-    
-                                    <section class="thumbnail">
-                                        <img src="../imagens/images_buys/VaziaMoletom.avif">
-    
-                                        <script>
-                                            // Obtém todas as imagens pequenas
-                                            const smallImages = document.querySelectorAll('.thumbnail');
-                                        
-                                            // Obtém a imagem principal (certifique-se de que o elemento da imagem principal tenha um ID apropriado)
-                                            const mainImage = document.querySelector('.select-image img');
-                                        
-                                            // Adiciona um ouvinte de evento de clique a cada imagem pequena
-                                            smallImages.forEach((thumbnail) => {
-                                                thumbnail.addEventListener('click', () => {
-                                                    // Obtém o URL da imagem clicada usando o atributo src
-                                                    const newImageSrc = thumbnail.querySelector('img').getAttribute('src');
-                                        
-                                                    // Define o URL da imagem principal para o novo URL
-                                                    mainImage.src = newImageSrc;
-                                                });
-                                            });
-    
-                                            
-                                        </script>
-                                                            
+                    </section>
+                    <section class="produto">
+                        <section class="info-produto">
+                            <h2 class="nome-produto">MOLETOM CAPUZ GRAPHIC <br> SHMOOFOIL (GÊNERO NEUTRO)</h2>
+                            <h2 class="preco-produto">R$549,99</h2>
+                            <section id="numeros-calcado">
+                                <label class="tamanho">Tamanho:</label><br>
+                                <section class="tamanho-calçado">P</section>
+                            </section>
+                            <button class="comprar">
+                                <a href="#" target="_blank" style="color: white;">Comprar</a>
+                            </button>
+                        </section>
                     </section>
                 </section>
             </section>
-            <section class="produto">
-                <section class="info-produto">
-                    <h2 class="nome-produto">MOLETOM CAPUZ GRAPHIC <br> SHMOOFOIL (GÊNERO NEUTRO)</h2>
-                    <h2 class="preco-produto"> R$549,99 </h2>
-                        <select id="parcelas">
-                            <option value="1">1X de R$ 549,99 Sem Juros</option>
-                            <option value="2">2X de R$ 274,99 Sem Juros</option>
-                            <option value="3">3X de R$ 183,33 Sem Juros</option>
-                            <option value="4">4X de R$ 137,49 Sem Juros</option>
-                            <option value="5">5X de R$ 109,99 Sem Juros</option>
-                            <option value="6">6X de R$ 91,66 Sem Juros</option>
-                        </select>
-                        <section id="numeros-calcado">
-                            <label class="tamanho">Tamanho:</label><br>
-                            <section class="tamanho-calçado">P</section>
-                            <section class="tamanho-calçado">M</section>
-                            <section class="tamanho-calçado">GG</section>
-                            <section class="tamanho-calçado">XL</section>
-                            <section class="tamanho-calçado">XL</section>
-                        </section>
-                        <section>
-                            <label class="quantidade">Quantidade:</label><br>
-                            <input type="number" id="quantidade" value="1" min="1">
-                            <button onclick="aumentarQuantidade()">+</button>
-                            <button onclick="diminuirQuantidade()">-</button>
-    
-                            <script>
-                            function aumentarQuantidade() {
-                            var quantidadeInput = document.getElementById("quantidade");
-                            quantidadeInput.value = parseInt(quantidadeInput.value) + 1;
-                        }
-    
-                        // Função para diminuir a quantidade
-                            function diminuirQuantidade() {
-                            var quantidadeInput = document.getElementById("quantidade");
-                            if (parseInt(quantidadeInput.value) > 1) {
-                                quantidadeInput.value = parseInt(quantidadeInput.value) - 1;
-                            }
-                        }
-                            </script>
-                        </section>
-                        <button class="comprar">
-                            COMPRAR
-                        </button>
-                </section>
-            </section>
         </section>
-        </section>
-        </section>
-    
+        
         <section class="descricao">
             <h1 class="detalhes">Descrição:</h1>
-            <p>
-                A arte icônica de Mark Gonzales mistura a estética urbana que ele viu crescendo em South Gate, Los Angeles, com ilustrações expressivas e muita imaginação. Para o blusão com capuz adidas Skateboarding Shmoofoil Logo, The Gonz apresenta uma versão pintada com spray do clássico personagem Shmoo. A estrutura de fleece médio encorpado significa que ela é feita para skate. Este moletom foi produzido com UNITEFIT, um sistema de ajuste para todos os gêneros criado com base em uma variedade de tamanhos, corpos e formas.
+            <p style="margin-bottom: 50px;">
+                A arte icônica de Mark Gonzales mistura a estética urbana que ele viu crescendo em South Gate, Los Angeles, com ilustrações expressivas e muita imaginação. Para o blusão com capuz adidas Skateboarding Shmoofoil Logo, The Gonz apresenta uma versão pintada com spray do clássico personagem Shmoo. A estrutura de fleece médio encorpado significa que ela é feita para skate. Este moletom foi produzido com UNITEFIT, um sistema de ajuste para todos os gêneros criado com base em uma variedade de tamanhos, corpos e formas. 
                 Os nossos produtos em algodão apoiam a plantação mais sustentável dessa matéria-prima.
             </p>
-            <h1 class="info-adicionais">Mais Informações:</h1>
-            <ul>
-                <li>• Modelagem padrão</li>
-                <li>• Capuz com cordão</li>
-                <li>• Fleece 70% algodão, 30% poliéster reciclado</li>
-                <li>• Bolso canguru</li>
-                <li>• Feito com Better Cotton</li>
-                <li>• Cor do artigo: Core White / Preloved Fuchsia</li>
-                <li>• Código do artigo: HS3052</li>
-            </ul>
         </section>
+        
         <h1 class="titulo"><a class="todos">Você</a> pode gostar</h1>
     <section class="produtos">
         <section class="produto-card">
@@ -297,6 +215,50 @@
               </section>
       </footer>
     </main>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Pega os valores dos parâmetros da URL
+        const nome = urlParams.get('nome');
+        const preco = urlParams.get('preco');
+        const descricao = urlParams.get('descricao');
+        const tamanho = urlParams.get('tamanho');
+        const imagem = urlParams.get('imagem');  // URL da imagem do produto
+        const linkCompra = urlParams.get('link');  // URL de redirecionamento para compra
+
+        // Verifica se os parâmetros estão disponíveis e os preenche
+        if (nome) {
+            document.querySelector('.nome-produto').textContent = nome;
+        }
+        if (preco) {
+            document.querySelector('.preco-produto').textContent = `R$ ${preco}`;
+        }
+        if (descricao) {
+            document.querySelector('.descricao p').textContent = descricao;
+        }
+        if (tamanho) {
+            document.querySelector('.tamanho-calçado').textContent = tamanho;
+        }
+        if (imagem) {
+            // Atualiza a imagem se o URL estiver presente
+            const selectImage = document.querySelector('#select-image img');
+            selectImage.src = imagem;
+            selectImage.alt = `Imagem do produto ${nome}`;  // Atualiza o atributo alt
+        } else {
+            console.error('Imagem não fornecida na URL.');
+        }
+
+        if (linkCompra) {
+            // Atualiza o link do botão de comprar
+            const comprarBtn = document.querySelector('.comprar a');
+            comprarBtn.href = linkCompra;
+            comprarBtn.textContent = 'Comprar Agora';  // Para garantir que o texto está correto
+        } else {
+            console.error('URL de compra não fornecida na URL.');
+        }
+    </script>
+    
+    
     <script src="../js/buy.js"></script>
     <script src="../js/script.js"></script>
 </body>
