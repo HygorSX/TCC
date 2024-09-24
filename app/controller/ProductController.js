@@ -52,6 +52,19 @@ class ProductController{
         });
     }
 
+    static MostrarProdutosRelacionados(req, res) {
+        const { nome_produto } = req.query; // Recebe o nome do produto em destaque como parâmetro
+        const sql = 'SELECT * FROM PRODUCTS WHERE NOME != ?'; // Exclui o produto em destaque
+    
+        pool.query(sql, [nome_produto], (err, results) => {
+            if (err) {
+                res.status(500).json({ error: 'Erro no banco de dados.' });
+            } else {
+                res.status(200).json({ message: "Produtos relacionados buscados com sucesso", produtos: results });
+            }
+        });
+    }
+
     static Deletar(req, res) {
         const { id } = req.params;
         const sql = 'DELETE FROM PRODUCTS WHERE ID = ?';

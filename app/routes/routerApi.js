@@ -30,7 +30,7 @@ router.get('/empresa/:id', (req, res) => {
 
 router.post('/products_usuario', ProductController.MostrarTodos);
 router.get('/products', ProductController.MostrarTodosHome);
-/*router.get('/products/:id', ProductController.getById);*/
+router.get('/produtos-relacionados', ProductController.MostrarProdutosRelacionados);
 router.post('/products', ProductController.Criar);
 router.put('/products/:id', ProductController.Atualizar);
 router.delete('/products/:id', ProductController.Deletar);

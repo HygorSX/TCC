@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Skooterz</title>
     <link rel="stylesheet" href="../css/style_buy.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/produtos.css">
@@ -89,74 +89,9 @@
             </p>
         </section>
         
-        <h1 class="titulo"><a class="todos">Você</a> pode gostar</h1>
+    <h1 class="titulo"><a class="todos">Você</a> pode gostar</h1>
     <section class="produtos">
-        <section class="produto-card">
-        <img src="../imagens/Skate_1.png" alt="imagem do produto">
-        <h2><a href="#">Titulo do produto</a></h2>
-        <p class="preço">Preço original: R$20,99</p>
-        <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-        <p class="desconto"> Você economiza: R$ 10.00</p>
-        <a href="#" class="buy">Compre Agora</a>
-        </section>
-        <section class="produto-card">
-            <img src="../imagens/Skate_2.jpg" alt="imagem do produto">
-            <h2><a href="#">Titulo do produto</a></h2>
-            <p class="preço">Preço original: R$20,99</p>
-            <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-            <p class="desconto"> Você economiza: R$ 10.00</p>
-            <a href="#" class="buy">Compre Agora</a>
-            </section>
-            <section class="produto-card">
-                <img src="../imagens/Skate_3.jpg" alt="imagem do produto">
-                <h2><a href="#">Titulo do produto</a></h2>
-                <p class="preço">Preço original: R$20,99</p>
-                <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-                <p class="desconto"> Você economiza: R$ 10.00</p>
-                <a href="#" class="buy">Compre Agora</a>
-                </section>
-                <section class="produto-card">
-                    <img src="../imagens/Skate_4.jpg" alt="imagem do produto">
-                    <h2><a href="#">Titulo do produto</a></h2>
-                    <p class="preço">Preço original: R$20,99</p>
-                    <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-                    <p class="desconto"> Você economiza: R$ 10.00</p>
-                    <a href="#" class="buy">Compre Agora</a>
-                    </section>
-    </section>
-    <section class="produtos">
-        <section class="tenis-card">
-        <img src="../imagens/produto_2.avif" alt="imagem do produto">
-        <h2><a href="#">Titulo do produto</a></h2>
-        <p class="preço">Preço original: R$20,99</p>
-        <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-        <p class="desconto"> Você economiza: R$ 10.00</p>
-        <a href="#" class="buy">Compre Agora</a>
-        </section>
-        <section class="tenis-card">
-            <img src="../imagens/produto_3.avif" alt="imagem do produto">
-            <h2><a href="#">Titulo do produto</a></h2>
-            <p class="preço">Preço original: R$20,99</p>
-            <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-            <p class="desconto"> Você economiza: R$ 10.00</p>
-            <a href="#" class="buy">Compre Agora</a>
-            </section>
-            <section class="tenis-card">
-                <img src="../imagens/produto_4.avif" alt="imagem do produto">
-                <h2><a href="#">Titulo do produto</a></h2>
-                <p class="preço">Preço original: R$20,99</p>
-                <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-                <p class="desconto"> Você economiza: R$ 10.00</p>
-                <a href="#" class="buy">Compre Agora</a>
-                </section>
-                <section class="tenis-card">
-                    <img src="../imagens/produto_5.avif" alt="imagem do produto">
-                    <h2><a href="#">Titulo do produto</a></h2>
-                    <p class="preço">Preço original: R$20,99</p>
-                    <p class="preço-atual"> Preço atual: <span class="preço-atual">R$ 10,99</span></p>
-                    <p class="desconto"> Você economiza: R$ 10.00</p>
-                    <a href="#" class="buy">Compre Agora</a>
-                    </section>
+        
     </section>
     <footer>
         <section class="container-footer">
@@ -220,6 +155,7 @@
 
         // Pega os valores dos parâmetros da URL
         const nome = urlParams.get('nome');
+        const nomeProdutoDestaque = urlParams.get('nome'); // Pode pegar isso da URL ou dos dados já carregados
         const preco = urlParams.get('preco');
         const descricao = urlParams.get('descricao');
         const tamanho = urlParams.get('tamanho');
@@ -256,6 +192,43 @@
         } else {
             console.error('URL de compra não fornecida na URL.');
         }
+
+        async function carregarProdutosRelacionados(nomeProdutoDestaque) {
+        console.log('Carregando produtos relacionados...');
+        try {
+            const response = await fetch(`http://localhost:3000/produtos-relacionados?nome_produto=${nomeProdutoDestaque}`);
+            if (!response.ok) {
+                throw new Error('Erro ao buscar os produtos relacionados, status: ' + response.status);
+            }
+
+            const data = await response.json();
+            console.log('Produtos relacionados recebidos:', data);
+
+            const produtos = data.produtos;
+            const produtosContainer = document.querySelector('.produtos'); // Corrigir o seletor
+
+            produtosContainer.innerHTML = ''; // Limpa o container antes de preencher
+
+            produtos.forEach(produto => {
+                const imagemUrl = produto.IMAGEM ? `/imagens_produto/${produto.IMAGEM}` : '/imagens/default.jpg';
+                const produtoCard = `
+                    <section class="produto-card">
+                        <img src="${imagemUrl}" alt="${produto.NOME}">
+                        <h2><a href="#">${produto.NOME}</a></h2>
+                        <p>Marca: ${produto.MARCA}</p>
+                        <p class="preco">Preço: R$ ${produto.VALOR}</p>
+                        <br>
+                        <a href="/buypage?nome=${produto.NOME}&preco=${produto.VALOR}&descricao=${produto.DESCRICAO}&tamanho=${produto.TAMANHO}&imagem=${imagemUrl}&link=${produto.URL_PRODUTO}" class="buy">Compre Agora</a>
+                    </section>
+                `;
+                produtosContainer.innerHTML += produtoCard;
+            });
+        } catch (error) {
+            console.error('Erro ao carregar os produtos relacionados:', error);
+        }
+    }
+
+    carregarProdutosRelacionados(nomeProdutoDestaque);
     </script>
     
     

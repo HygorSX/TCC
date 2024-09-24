@@ -110,6 +110,7 @@ async function carregarProdutos() {
                 <section class="produto-card">
                     <img src="${imagemUrl}" alt="${produto.NOME}">
                     <h2><a href="#">${produto.NOME}</a></h2>
+                    <p>Marca: ${produto.MARCA}</p>
                     <p class="preco">Preço: R$ ${produto.VALOR}</p>
                     <br>
                     <a href="/buypage?nome=${produto.NOME}&preco=${produto.VALOR}&descricao=${produto.DESCRICAO}&tamanho=${produto.TAMANHO}&imagem=/imagens_produto/${produto.IMAGEM}&link=${produto.URL_PRODUTO}" class="buy">Compre Agora</a>
