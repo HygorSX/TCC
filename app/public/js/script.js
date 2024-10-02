@@ -48,15 +48,14 @@ function proximaImg(){
     }
 
     function logoutUser() {
-        localStorage.removeItem('userName');
-        localStorage.removeItem('token');
-        localStorage.removeItem('usuario');
-        location.href = "/"; // Recarrega a página para refletir as mudanças
+        localStorage.clear(); // Limpa todos os itens do localStorage
+        location.href = "/"; // Redireciona para a página inicial
     }
-
+    
     document.getElementById('logout').addEventListener('click', function() {
         logoutUser();
     });
+    
 
 
     var modal = document.getElementById("myModal");
@@ -122,6 +121,38 @@ async function carregarProdutos() {
         console.error('Erro ao carregar os produtos:', error);
     }
 }
+
+function verificarUsuarioOuEmpresa() {
+    const empresa = localStorage.getItem('empresa');
+    const usuario = localStorage.getItem('usuario');
+
+    if (empresa) {
+        window.location.href = '/editar_empresa'; // Redireciona para a página de edição da empresa
+    } else if (usuario) {
+        new Notify({
+            status: 'error',
+            title: 'Você não tem acesso a essa área!',
+            text: 'Apenas empresas podem acessar essa página!',
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 3000,
+            notificationsGap: null,
+            notificationsPadding: null,
+            type: 'outline',
+            position: 'x-center',
+            customWrapper: '',
+        });
+    } else {
+        window.location.href = '/login_empresa'; // Redireciona para a página de login de empresa
+    }
+}
+
+
 
 window.onload = () => {
     console.log('window.onload chamado');
