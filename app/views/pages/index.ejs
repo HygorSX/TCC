@@ -298,78 +298,136 @@
                   });
   
                   function checkInputs() {
-                      const nameCompanyValue = nameCompany.value.trim();
-                      const telCompanyValue = telCompany.value.trim();
-                      const emailCompanyValue = emailCompany.value.trim();
-                      const cnpjValue = cnpj.value.trim();
-                      const logradouroValue = logradouro.value.trim();
-                      const bairroValue = bairro.value.trim();
-                      const cidadeValue = cidade.value.trim();
-                      const passwordCompanyValue = passwordCompany.value.trim();
-  
-                      let isValid = true;
-  
-                      if (nameCompanyValue === '') {
-                          setErrorFor(nameCompany, 'Preencha esse campo');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(nameCompany);
-                      }
-  
-                      if (telCompanyValue === '') {
-                          setErrorFor(telCompany, 'Preencha esse campo');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(telCompany);
-                      }
-  
-                      if (emailCompanyValue === '') {
-                          setErrorFor(emailCompany, 'Preencha esse campo');
-                          isValid = false;
-                      } else if (!isEmail(emailCompanyValue)) {
-                          setErrorFor(emailCompany, 'Email inválido');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(emailCompany);
-                      }
-  
-                      if (cnpjValue === '') {
-                          setErrorFor(cnpj, 'Preencha esse campo');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(cnpj);
-                      }
-  
-                      if (logradouroValue === '') {
-                          setErrorFor(logradouro, 'Preencha esse campo');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(logradouro);
-                      }
-  
-                      if (bairroValue === '') {
-                          setErrorFor(bairro, 'Preencha esse campo');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(bairro);
-                      }
-  
-                      if (cidadeValue === '') {
-                          setErrorFor(cidade, 'Preencha esse campo');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(cidade);
-                      }
-  
-                      if (passwordCompanyValue.length < 8) {
-                          setErrorFor(passwordCompany, 'Senha deve ter mais que 8 caracteres');
-                          isValid = false;
-                      } else {
-                          setSuccessFor(passwordCompany);
-                      }
-  
-                      return isValid;
-                  }
+                    const nameCompanyValue = nameCompany.value.trim();
+                    const telCompanyValue = telCompany.value.trim();
+                    const emailCompanyValue = emailCompany.value.trim();
+                    const cnpjValue = cnpj.value.trim();
+                    const logradouroValue = logradouro.value.trim();
+                    const bairroValue = bairro.value.trim();
+                    const cidadeValue = cidade.value.trim();
+                    const passwordCompanyValue = passwordCompany.value.trim();
+
+                    let isValid = true;
+
+                    // Validação Nome
+                    if (nameCompanyValue === '') {
+                        setErrorFor(nameCompany, 'Preencha esse campo');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(nameCompany);
+                    }
+
+                    // Validação Telefone
+                    if (telCompanyValue === '') {
+                        setErrorFor(telCompany, 'Preencha esse campo');
+                        isValid = false;
+                    } else if (!isValidPhone(telCompanyValue)) {
+                        setErrorFor(telCompany, 'Telefone inválido');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(telCompany);
+                    }
+
+                    // Validação Email
+                    if (emailCompanyValue === '') {
+                        setErrorFor(emailCompany, 'Preencha esse campo');
+                        isValid = false;
+                    } else if (!isEmail(emailCompanyValue)) {
+                        setErrorFor(emailCompany, 'Email inválido');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(emailCompany);
+                    }
+
+                    // Validação CNPJ
+                    if (cnpjValue === '') {
+                        setErrorFor(cnpj, 'Preencha esse campo');
+                        isValid = false;
+                    } else if (!isValidCNPJ(cnpjValue)) {
+                        setErrorFor(cnpj, 'CNPJ inválido');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(cnpj);
+                    }
+
+                    // Validação Logradouro
+                    if (logradouroValue === '') {
+                        setErrorFor(logradouro, 'Preencha esse campo');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(logradouro);
+                    }
+
+                    // Validação Bairro
+                    if (bairroValue === '') {
+                        setErrorFor(bairro, 'Preencha esse campo');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(bairro);
+                    }
+
+                    // Validação Cidade
+                    if (cidadeValue === '') {
+                        setErrorFor(cidade, 'Preencha esse campo');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(cidade);
+                    }
+
+                    // Validação Senha
+                    if (passwordCompanyValue.length < 8) {
+                        setErrorFor(passwordCompany, 'Senha deve ter mais que 8 caracteres');
+                        isValid = false;
+                    } else {
+                        setSuccessFor(passwordCompany);
+                    }
+
+                    return isValid;
+                }
+
+                // Função para validar CNPJ
+                function isValidCNPJ(cnpj) {
+                    cnpj = cnpj.replace(/[^\d]+/g, '');
+
+                    if (cnpj.length !== 14) return false;
+
+                    // Validar os dígitos verificadores
+                    let tamanho = cnpj.length - 2;
+                    let numeros = cnpj.substring(0, tamanho);
+                    let digitos = cnpj.substring(tamanho);
+                    let soma = 0;
+                    let pos = tamanho - 7;
+
+                    for (let i = tamanho; i >= 1; i--) {
+                        soma += numeros.charAt(tamanho - i) * pos--;
+                        if (pos < 2) pos = 9;
+                    }
+
+                    let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                    if (resultado != digitos.charAt(0)) return false;
+
+                    tamanho = tamanho + 1;
+                    numeros = cnpj.substring(0, tamanho);
+                    soma = 0;
+                    pos = tamanho - 7;
+
+                    for (let i = tamanho; i >= 1; i--) {
+                        soma += numeros.charAt(tamanho - i) * pos--;
+                        if (pos < 2) pos = 9;
+                    }
+
+                    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                    if (resultado != digitos.charAt(1)) return false;
+
+                    return true;
+                }
+
+                // Função para validar Telefone
+                function isValidPhone(tel) {
+                    const cleaned = tel.replace(/[^\d]+/g, '');
+                    return cleaned.length === 10 || cleaned.length === 11;
+                }
+
   
                   function setErrorFor(input, message) {
                       const formControl = input.parentElement;

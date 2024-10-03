@@ -148,7 +148,28 @@ function verificarUsuarioOuEmpresa() {
             customWrapper: '',
         });
     } else {
-        window.location.href = '/login_empresa'; // Redireciona para a página de login de empresa
+        new Notify({
+            status: 'error',
+            title: 'Apenas empresas podem acessar essa página!',
+            text: 'Você será redirecionado para a página de login!',
+            effect: 'fade',
+            speed: 300,
+            customClass: '',
+            customIcon: '',
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 3000, // Notificação será exibida por 3 segundos
+            notificationsGap: null,
+            notificationsPadding: null,
+            type: 'outline',
+            position: 'x-center',
+            customWrapper: '',
+        });
+        // Aguarda 3 segundos antes de redirecionar
+        setTimeout(() => {
+            window.location.href = '/login_empresa'; // Redireciona para a página de login de empresa
+        }, 3000); // 3000 milissegundos (3 segundos)
     }
 }
 
