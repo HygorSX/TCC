@@ -7,6 +7,86 @@ h1 {
     text-align: center;
     font-family: var(--font-corpo);
 }
+.produto-link{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.produto-link 
+.COMPRAR{
+    border: 1px solid rgb(130, 10, 209);
+    border-radius: 15px;
+    margin: 30px;
+    padding: 5px;
+    padding: px;
+    text-transform: uppercase;
+    background-color: rgb(130, 10, 209);
+    color: white;
+    font-family: var(--font-corpo);
+}
+a.COMPRAR{
+    color: white;
+}
+#resultados-pesquisa {
+    position: fixed;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    z-index: 999;
+    display: flex;
+    max-height: 800px;
+    width: 50%;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    box-shadow: 1px 9px 8px 20px rgb(0 0 0 / 14%);
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.produto-card-pesquisa {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+.produto-card-pesquisa img {
+    padding: 15px;
+    width: 100%;
+    max-width: 200px; /* Largura máxima da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 15px;
+}
+
+.produto-card-pesquisa h2 {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Garante que o link do nome não ultrapasse a largura do card */
+}
+
+.produto-card-pesquisa a {
+    color: black;
+    text-decoration: none;
+    font-family: var(--font-corpo);
+    font-size: large;
+}
+
+.produto-card-pesquisa p {
+    line-height: 1.5;
+    font-family: var(--font-corpo);
+}
+
+
 
 .titulo-promo {
     padding-top: 7vh;
@@ -104,6 +184,7 @@ a.buy:hover {
     transition: 0.3s;
 }
 
+
 @media screen and (max-width: 625px) {
     .produto-card img, .tenis-card img {
         max-width: 150px; /* Ajusta a largura da imagem em telas menores */
@@ -129,5 +210,24 @@ a.buy:hover {
 
     a.buy {
         font-size: 12px;
+    }
+
+    .produto-link h3{
+        font-size: 14px;
+    }
+
+    .produto-link p{
+        font-size: 15px;
+    }
+    #resultados-pesquisa{
+        position: fixed;
+        padding: px;
+        top: 80px;
+        left: 23%;
+        width: 100%;
+        align-content: center;
+    }
+    .produto-card-pesquisa img{
+        max-width: 150px;
     }
 }

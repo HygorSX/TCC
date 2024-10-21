@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,35 +11,34 @@
     <link rel="stylesheet" href="../css/avaliação.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/registrar_empresa.css">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet"
-    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
-    
+
 </head>
 
 <body>
 
-    <header> 
+    <header>
         <a href="/" class="logo"><i class="ri-ancient-gate-fill"></i><span>Skooterz™</span>
-    </a>
+        </a>
         </a>
         </section>
         <ul class="navbar">
-            
+
             <li><a href="/shape">Shapes </a></li>
             <li><a href="/skate">Skates </a></li>
             <li><a href="/roupas">Roupas </a></li>
             <li><a href="/acessorios">Acessórios</a></li>
             <li><a href="/tenis">Tenis</a></li>
-            
+
         </ul><!--Cabecalho-Link-->
         <section class="main">
             <div class="user" onclick="verificarUsuarioOuEmpresa()">
@@ -46,45 +46,53 @@
             </div>
             <a href="./login" class="user" id="user">
                 <i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se
+
+                <section id="user-dropdown" class="dropdown hidden" style="margin-left: 85px;">
+                    <a href="/" id="logout"><i class="fa-solid fa-right-from-bracket"
+                        style="color: #ff0000;"></i>ㅤLogout</a>
+                    </section>
+                </section>
             </a>
             <section class="bx bx-menu" id="menu-icon"></section>
             <section class="search-box">
-                <input type="text" class="search-txt" placeholder="Pesquisar">
-                <a href="#" class="search-btn">
+                <input type="text" class="search-txt" id="search-input" placeholder="Pesquisar">
+                <a href="javascript:void(0);" class="search-btn" onclick="buscarProdutos()">
                     <img src="../imagens/001-loupe.png" alt="Lupa" height="20" width="20">
                 </a>
             </section>
-            <section id="user-dropdown" class="dropdown hidden">
-                <a href="/" id="logout"class="margin-left: 200px;"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>ㅤLogout</a>
-            </section>
-        </section>
-        <script>
-            function updateUserUI() {
-        const userName = localStorage.getItem('userName');
-        const userElement = document.getElementById('user');
-        const userDropdown = document.getElementById('user-dropdown');
-        
-        if (userName) {
-            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
-            userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
-            userElement.addEventListener('click', function() {
-                userDropdown.classList.toggle('hidden');
-            });
-        } else {
-            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se`;
-            userElement.href = "/login";
-        }
-    }
 
-    
-    // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
-    window.onload = function() {
-        updateUserUI();
-    }
+            <!-- Container para exibir os resultados da pesquisa -->
+            
+            
+            
+            
+            <script>
+            function updateUserUI() {
+                const userName = localStorage.getItem('userName');
+                const userElement = document.getElementById('user');
+                const userDropdown = document.getElementById('user-dropdown');
+
+                if (userName) {
+                    userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
+                    userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
+                    userElement.addEventListener('click', function () {
+                        userDropdown.classList.toggle('hidden');
+                    });
+                } else {
+                    userElement.innerHTML = `<i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se`;
+                    userElement.href = "/login";
+                }
+            }
+
+
+            // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
+            window.onload = function () {
+                updateUserUI();
+            }
         </script>
-    
+
     </header>
-    
+    <div id="resultados-pesquisa"></div>
     <section class="slider">
         <section class="slider-content">
             <input type="radio" name="btn-radio" id="radio1">
@@ -93,23 +101,31 @@
             <input type="radio" name="btn-radio" id="radio4">
 
             <section class="slide-box primeiro">
-                <img class="img-desktop" src="../imagens/1-slide-1681500885236-4814946635-4ce3495d82009e69de6a53691ec8eca41681500889-1920-1920.webp" alt="slide 1">
+                <img class="img-desktop"
+                    src="../imagens/1-slide-1681500885236-4814946635-4ce3495d82009e69de6a53691ec8eca41681500889-1920-1920.webp"
+                    alt="slide 1">
                 <img class="img-mobile" src="../imagens/Design sem nome (3).png" alt="slide 1">
             </section>
 
             <section class="slide-box">
-                <img class="img-desktop"src="../imagens/1-slide-1684518683347-3954613135-2d57cdae14f1b5d29efe4a08874b835b1684518687-1920-1920.webp" alt="slide 2">
+                <img class="img-desktop"
+                    src="../imagens/1-slide-1684518683347-3954613135-2d57cdae14f1b5d29efe4a08874b835b1684518687-1920-1920.webp"
+                    alt="slide 2">
                 <img class="img-mobile" src="../imagens/Design sem nome (4).png" alt="slide 2">
-            </section>
-            
-            <section class="slide-box">
-                <img class="img-desktop"src="../imagens/1-slide-1684869508503-8028506649-bb64843e00c5fbe1bcf0340d1a83fdd21684869510-1920-1920.webp" alt="slide 3">
-                <img class="img-mobile"src="../imagens/Design sem nome (5).png" alt="3">
             </section>
 
             <section class="slide-box">
-                <img class="img-desktop"src="../imagens/1-slide-1685127719459-53481262-5b468c34f66eec721be45953a38e77bc1685127722-1920-1920.webp" alt="slide 4">
-                <img class="img-mobile"src="../imagens/Design sem nome (6).png" alt="3">
+                <img class="img-desktop"
+                    src="../imagens/1-slide-1684869508503-8028506649-bb64843e00c5fbe1bcf0340d1a83fdd21684869510-1920-1920.webp"
+                    alt="slide 3">
+                <img class="img-mobile" src="../imagens/Design sem nome (5).png" alt="3">
+            </section>
+
+            <section class="slide-box">
+                <img class="img-desktop"
+                    src="../imagens/1-slide-1685127719459-53481262-5b468c34f66eec721be45953a38e77bc1685127722-1920-1920.webp"
+                    alt="slide 4">
+                <img class="img-mobile" src="../imagens/Design sem nome (6).png" alt="3">
             </section>
 
             <section class="nav-auto">
@@ -127,93 +143,107 @@
             </section>
         </section>
     </section>
-    
+
+    <div class="custom-ad" style="background-color: mediumpurple;">
+        <h1>Seu anúncio ficará aqui</h1>
+        <p style="margin-left: 40px; margin-right: 40px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <a href="/promo" class="btn" style="margin: 40px;">Saiba Mais</a>
+    </div>
+
     <h1>Produtos que <a class="todos">todos</a> estão de olho</h1>
     <section id="produtos" class="produtos">
-        
+
     </section>
+
+    <div class="custom-ad" style="background-color: mediumpurple;">
+        <h1>Seu anúncio ficará aqui</h1>
+        <p style="margin-left: 40px; margin-right: 40px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <a href="/promo" class="btn" style="margin: 40px;">Saiba Mais</a>
+    </div>
+    
     <section id="section-users">
         <section class="avaliation-text">
-          <h2 class="text">Veja avaliações de clientes <a>Skooterz</a></h2>
+            <h2 class="text">Veja avaliações de clientes <a>Skooterz</a></h2>
         </section>
         <section class="users_content">
-          <section class="users_card">
-            <section class="user_infos">
-              <img src="../imagens/foto_usuario1.jpg" alt="Imagem ilustrativa do usuário">
-              <span>@Julia_sk8</span>
+            <section class="users_card">
+                <section class="user_infos">
+                    <img src="../imagens/foto_usuario1.jpg" alt="Imagem ilustrativa do usuário">
+                    <span>@Julia_sk8</span>
+                </section>
+                <p class="p__child-avaliation-card">Esse com certeza é o melhor site para quem ama o esporte </p>
             </section>
-            <p class="p__child-avaliation-card">Esse com certeza é o melhor site para quem ama o esporte </p>
-          </section>
-          <section class="users_card">
-              <section class="user_infos">
-                <img src="../imagens/foto_usuario2.jpg" alt="Imagem ilustrativa do usuário">
-                <span>@Chorão_underground</span>
-              </section>
-            <p class="p__child-avaliation-card">A grande variedade de produtos e atenção com o consumidor é sensacional</p>
-          </section>
-          <section class="users_card">
-            <section class="user_infos">
-              <img src="../imagens/foto_usuario3.jpg" alt="Imagem ilustrativa do usuário">
-              <span>@Raissa_Leal</span>
+            <section class="users_card">
+                <section class="user_infos">
+                    <img src="../imagens/foto_usuario2.jpg" alt="Imagem ilustrativa do usuário">
+                    <span>@Chorão_underground</span>
+                </section>
+                <p class="p__child-avaliation-card">A grande variedade de produtos e atenção com o consumidor é
+                    sensacional</p>
             </section>
-            <p class="p__child-avaliation-card">Encontrei os melhores shapes do mercado nesta loja!!</p>
-          </section>
+            <section class="users_card">
+                <section class="user_infos">
+                    <img src="../imagens/foto_usuario3.jpg" alt="Imagem ilustrativa do usuário">
+                    <span>@Raissa_Leal</span>
+                </section>
+                <p class="p__child-avaliation-card">Encontrei os melhores shapes do mercado nesta loja!!</p>
+            </section>
         </section>
-      </section>
-      <footer>
+    </section>
+    <footer>
         <section class="container-footer">
-          <section class="row-footer">
-            <!-- Footer col-->
-            <section class="footer-col">
-              <h4>Empresa</h4>
-              <ul>
-                <li><a href="">Quem Somos</a></li>
-                <li><a href="">Política de privacidade</a></li>
-                <li><a href="">Agregados/Afiliados</a></li>
-              </ul>
-            </section>
-      
-            <!-- Footer col-->
-            <section class="footer-col">
-              <h4>Obter Ajuda</h4>
-              <ul>
-                <li><a href="">Devoluções</a></li>
-                <li><a href="">Status de pedido</a></li>
-                <li><a href="">Opções de pagamento</a></li>
-              </ul>
-            </section>
-      
-            <!-- Footer col-->
-            <section class="footer-col">
-              <h4>Entre em contato</h4>
-              <ul>
-                <li><a href=""><i class="fa fa-whatsapp"></i> 551199999-9999</a></li>
-                <li><a href="">sk8california@gmail.com</a></li>
-                <li><a href="">Rua sucesso</a></li>
-              </ul>
-            </section>
-      
-            <!-- Footer col-->
-            <section class="footer-col">
-              <h4>Cadastre sua empresa para mais!</h4>
-              <section class="form-sub">
-                <button id="openModalBtn">Cadastre-se</button>
-              </section>
-              <section class="form-sub">
-                <a href="login_empresa" style="color: #ffff;">Já Tenho Uma Conta</a>
-              </section>
-              <section class="medias-socias">
-                <a href=""><i class="fa fa-facebook"></i></a>
-                <a href=""><i class="fa fa-instagram"></i></a>
-                <a href=""><i class="fa fa-twitter"></i></a>
-                <a href=""><i class="fa fa-github"></i></a>
-              </section>
-            </section>
-          </section>
-        </section>
-      </footer>
+            <section class="row-footer">
+                <!-- Footer col-->
+                <section class="footer-col">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="">Quem Somos</a></li>
+                        <li><a href="">Política de privacidade</a></li>
+                        <li><a href="">Agregados/Afiliados</a></li>
+                    </ul>
+                </section>
 
-      <section id="myModal" class="modal">
+                <!-- Footer col-->
+                <section class="footer-col">
+                    <h4>Obter Ajuda</h4>
+                    <ul>
+                        <li><a href="">Devoluções</a></li>
+                        <li><a href="">Status de pedido</a></li>
+                        <li><a href="">Opções de pagamento</a></li>
+                    </ul>
+                </section>
+
+                <!-- Footer col-->
+                <section class="footer-col">
+                    <h4>Entre em contato</h4>
+                    <ul>
+                        <li><a href=""><i class="fa fa-whatsapp"></i> 551199999-9999</a></li>
+                        <li><a href="">sk8california@gmail.com</a></li>
+                        <li><a href="">Rua sucesso</a></li>
+                    </ul>
+                </section>
+
+                <!-- Footer col-->
+                <section class="footer-col">
+                    <h4>Cadastre sua empresa para mais!</h4>
+                    <section class="form-sub">
+                        <button id="openModalBtn">Cadastre-se</button>
+                    </section>
+                    <section class="form-sub">
+                        <a href="login_empresa" style="color: #ffff;">Já Tenho Uma Conta</a>
+                    </section>
+                    <section class="medias-socias">
+                        <a href=""><i class="fa fa-facebook"></i></a>
+                        <a href=""><i class="fa fa-instagram"></i></a>
+                        <a href=""><i class="fa fa-twitter"></i></a>
+                        <a href=""><i class="fa fa-github"></i></a>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </footer>
+
+    <section id="myModal" class="modal">
         <section class="modal-content">
             <span class="close">&times;</span>
             <!-- Formulário de registro -->
@@ -227,22 +257,22 @@
                                 <section class="input-field">
                                     <label>Nome Completo</label>
                                     <input type="text" placeholder="Digite o nome completo" id="name_company">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                                 <section class="input-field">
                                     <label>Telefone</label>
                                     <input type="number" placeholder="Digite seu telefone" id="tel_company">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                                 <section class="input-field">
                                     <label>Email</label>
                                     <input type="text" placeholder="Digite seu email" id="email_company">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                                 <section class="input-field">
                                     <label>CNPJ</label>
                                     <input type="number" placeholder="Digite seu CNPJ" id="CNPJ">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                             </section>
                         </section>
@@ -252,22 +282,22 @@
                                 <section class="input-field">
                                     <label>Logradouro</label>
                                     <input type="text" placeholder="Logradouro" id="logradouro">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                                 <section class="input-field">
                                     <label>Bairro</label>
                                     <input type="text" placeholder="Bairro" id="bairro">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                                 <section class="input-field">
                                     <label>Cidade</label>
                                     <input type="text" placeholder="Cidade" id="cidade">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                                 <section class="input-field">
                                     <label>Senha</label>
                                     <input type="password" placeholder="Senha" id="password_company">
-                                  <small>Error Message</small>
+                                    <small>Error Message</small>
                                 </section>
                             </section>
                             <button class="nextBtn" type="submit">
@@ -278,224 +308,246 @@
                     </section>
                 </form>
                 <script>
-                  const form = document.getElementById('signUpFormCompany');
-                  const nameCompany = document.getElementById('name_company');
-                  const telCompany = document.getElementById('tel_company');
-                  const emailCompany = document.getElementById('email_company');
-                  const cnpj = document.getElementById('CNPJ');
-                  const logradouro = document.getElementById('logradouro');
-                  const bairro = document.getElementById('bairro');
-                  const cidade = document.getElementById('cidade');
-                  const passwordCompany = document.getElementById('password_company');
-  
-                  form.addEventListener('submit', (e) => {
-                      e.preventDefault();
-  
-                      if (checkInputs()) {
-                          // All inputs are valid, proceed with form submission
-                          submitForm();
-                      }
-                  });
-  
-                  function checkInputs() {
-                    const nameCompanyValue = nameCompany.value.trim();
-                    const telCompanyValue = telCompany.value.trim();
-                    const emailCompanyValue = emailCompany.value.trim();
-                    const cnpjValue = cnpj.value.trim();
-                    const logradouroValue = logradouro.value.trim();
-                    const bairroValue = bairro.value.trim();
-                    const cidadeValue = cidade.value.trim();
-                    const passwordCompanyValue = passwordCompany.value.trim();
+                    const form = document.getElementById('signUpFormCompany');
+                    const nameCompany = document.getElementById('name_company');
+                    const telCompany = document.getElementById('tel_company');
+                    const emailCompany = document.getElementById('email_company');
+                    const cnpj = document.getElementById('CNPJ');
+                    const logradouro = document.getElementById('logradouro');
+                    const bairro = document.getElementById('bairro');
+                    const cidade = document.getElementById('cidade');
+                    const passwordCompany = document.getElementById('password_company');
 
-                    let isValid = true;
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
 
-                    // Validação Nome
-                    if (nameCompanyValue === '') {
-                        setErrorFor(nameCompany, 'Preencha esse campo');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(nameCompany);
+                        if (checkInputs()) {
+                            // All inputs are valid, proceed with form submission
+                            submitForm();
+                        }
+                    });
+
+                    function checkInputs() {
+                        const nameCompanyValue = nameCompany.value.trim();
+                        const telCompanyValue = telCompany.value.trim();
+                        const emailCompanyValue = emailCompany.value.trim();
+                        const cnpjValue = cnpj.value.trim();
+                        const logradouroValue = logradouro.value.trim();
+                        const bairroValue = bairro.value.trim();
+                        const cidadeValue = cidade.value.trim();
+                        const passwordCompanyValue = passwordCompany.value.trim();
+
+                        let isValid = true;
+
+                        // Validação Nome
+                        if (nameCompanyValue === '') {
+                            setErrorFor(nameCompany, 'Preencha esse campo');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(nameCompany);
+                        }
+
+                        // Validação Telefone
+                        if (telCompanyValue === '') {
+                            setErrorFor(telCompany, 'Preencha esse campo');
+                            isValid = false;
+                        } else if (!isValidPhone(telCompanyValue)) {
+                            setErrorFor(telCompany, 'Telefone inválido');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(telCompany);
+                        }
+
+                        // Validação Email
+                        if (emailCompanyValue === '') {
+                            setErrorFor(emailCompany, 'Preencha esse campo');
+                            isValid = false;
+                        } else if (!isEmail(emailCompanyValue)) {
+                            setErrorFor(emailCompany, 'Email inválido');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(emailCompany);
+                        }
+
+                        // Validação CNPJ
+                        if (cnpjValue === '') {
+                            setErrorFor(cnpj, 'Preencha esse campo');
+                            isValid = false;
+                        } else if (!isValidCNPJ(cnpjValue)) {
+                            setErrorFor(cnpj, 'CNPJ inválido');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(cnpj);
+                        }
+
+                        // Validação Logradouro
+                        if (logradouroValue === '') {
+                            setErrorFor(logradouro, 'Preencha esse campo');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(logradouro);
+                        }
+
+                        // Validação Bairro
+                        if (bairroValue === '') {
+                            setErrorFor(bairro, 'Preencha esse campo');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(bairro);
+                        }
+
+                        // Validação Cidade
+                        if (cidadeValue === '') {
+                            setErrorFor(cidade, 'Preencha esse campo');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(cidade);
+                        }
+
+                        // Validação Senha
+                        if (passwordCompanyValue.length < 8) {
+                            setErrorFor(passwordCompany, 'Senha deve ter mais que 8 caracteres');
+                            isValid = false;
+                        } else {
+                            setSuccessFor(passwordCompany);
+                        }
+
+                        return isValid;
                     }
 
-                    // Validação Telefone
-                    if (telCompanyValue === '') {
-                        setErrorFor(telCompany, 'Preencha esse campo');
-                        isValid = false;
-                    } else if (!isValidPhone(telCompanyValue)) {
-                        setErrorFor(telCompany, 'Telefone inválido');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(telCompany);
+                    // Função para validar CNPJ
+                    function isValidCNPJ(cnpj) {
+                        cnpj = cnpj.replace(/[^\d]+/g, '');
+
+                        if (cnpj.length !== 14) return false;
+
+                        // Validar os dígitos verificadores
+                        let tamanho = cnpj.length - 2;
+                        let numeros = cnpj.substring(0, tamanho);
+                        let digitos = cnpj.substring(tamanho);
+                        let soma = 0;
+                        let pos = tamanho - 7;
+
+                        for (let i = tamanho; i >= 1; i--) {
+                            soma += numeros.charAt(tamanho - i) * pos--;
+                            if (pos < 2) pos = 9;
+                        }
+
+                        let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                        if (resultado != digitos.charAt(0)) return false;
+
+                        tamanho = tamanho + 1;
+                        numeros = cnpj.substring(0, tamanho);
+                        soma = 0;
+                        pos = tamanho - 7;
+
+                        for (let i = tamanho; i >= 1; i--) {
+                            soma += numeros.charAt(tamanho - i) * pos--;
+                            if (pos < 2) pos = 9;
+                        }
+
+                        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                        if (resultado != digitos.charAt(1)) return false;
+
+                        return true;
                     }
 
-                    // Validação Email
-                    if (emailCompanyValue === '') {
-                        setErrorFor(emailCompany, 'Preencha esse campo');
-                        isValid = false;
-                    } else if (!isEmail(emailCompanyValue)) {
-                        setErrorFor(emailCompany, 'Email inválido');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(emailCompany);
+                    // Função para validar Telefone
+                    function isValidPhone(tel) {
+                        const cleaned = tel.replace(/[^\d]+/g, '');
+                        return cleaned.length === 10 || cleaned.length === 11;
                     }
 
-                    // Validação CNPJ
-                    if (cnpjValue === '') {
-                        setErrorFor(cnpj, 'Preencha esse campo');
-                        isValid = false;
-                    } else if (!isValidCNPJ(cnpjValue)) {
-                        setErrorFor(cnpj, 'CNPJ inválido');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(cnpj);
+
+                    function setErrorFor(input, message) {
+                        const formControl = input.parentElement;
+                        const small = formControl.querySelector('small');
+
+                        small.innerText = message;
+
+                        formControl.className = 'input-field error';
                     }
 
-                    // Validação Logradouro
-                    if (logradouroValue === '') {
-                        setErrorFor(logradouro, 'Preencha esse campo');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(logradouro);
+                    function setSuccessFor(input) {
+                        const formControl = input.parentElement;
+
+                        formControl.className = 'input-field success';
                     }
 
-                    // Validação Bairro
-                    if (bairroValue === '') {
-                        setErrorFor(bairro, 'Preencha esse campo');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(bairro);
+                    function isEmail(email) {
+                        return /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(email);
                     }
 
-                    // Validação Cidade
-                    if (cidadeValue === '') {
-                        setErrorFor(cidade, 'Preencha esse campo');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(cidade);
-                    }
+                    function submitForm() {
+                        const name_company = nameCompany.value.trim();
+                        const tel_company = telCompany.value.trim();
+                        const email_company = emailCompany.value.trim();
+                        const password_company = passwordCompany.value.trim();
+                        const CNPJ = cnpj.value.trim();
+                        const Logradouro = logradouro.value.trim();
+                        const Bairro = bairro.value.trim();
+                        const Cidade = cidade.value.trim();
 
-                    // Validação Senha
-                    if (passwordCompanyValue.length < 8) {
-                        setErrorFor(passwordCompany, 'Senha deve ter mais que 8 caracteres');
-                        isValid = false;
-                    } else {
-                        setSuccessFor(passwordCompany);
-                    }
-
-                    return isValid;
-                }
-
-                // Função para validar CNPJ
-                function isValidCNPJ(cnpj) {
-                    cnpj = cnpj.replace(/[^\d]+/g, '');
-
-                    if (cnpj.length !== 14) return false;
-
-                    // Validar os dígitos verificadores
-                    let tamanho = cnpj.length - 2;
-                    let numeros = cnpj.substring(0, tamanho);
-                    let digitos = cnpj.substring(tamanho);
-                    let soma = 0;
-                    let pos = tamanho - 7;
-
-                    for (let i = tamanho; i >= 1; i--) {
-                        soma += numeros.charAt(tamanho - i) * pos--;
-                        if (pos < 2) pos = 9;
-                    }
-
-                    let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-                    if (resultado != digitos.charAt(0)) return false;
-
-                    tamanho = tamanho + 1;
-                    numeros = cnpj.substring(0, tamanho);
-                    soma = 0;
-                    pos = tamanho - 7;
-
-                    for (let i = tamanho; i >= 1; i--) {
-                        soma += numeros.charAt(tamanho - i) * pos--;
-                        if (pos < 2) pos = 9;
-                    }
-
-                    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-                    if (resultado != digitos.charAt(1)) return false;
-
-                    return true;
-                }
-
-                // Função para validar Telefone
-                function isValidPhone(tel) {
-                    const cleaned = tel.replace(/[^\d]+/g, '');
-                    return cleaned.length === 10 || cleaned.length === 11;
-                }
-
-  
-                  function setErrorFor(input, message) {
-                      const formControl = input.parentElement;
-                      const small = formControl.querySelector('small');
-  
-                      small.innerText = message;
-  
-                      formControl.className = 'input-field error';
-                  }
-  
-                  function setSuccessFor(input) {
-                      const formControl = input.parentElement;
-  
-                      formControl.className = 'input-field success';
-                  }
-  
-                  function isEmail(email) {
-                      return /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(email);
-                  }
-  
-                  function submitForm() {
-                      const name_company = nameCompany.value.trim();
-                      const tel_company = telCompany.value.trim();
-                      const email_company = emailCompany.value.trim();
-                      const password_company = passwordCompany.value.trim();
-                      const CNPJ = cnpj.value.trim();
-                      const Logradouro = logradouro.value.trim();
-                      const Bairro = bairro.value.trim();
-                      const Cidade = cidade.value.trim();
-  
-                      fetch('http://localhost:3000/criar_empresa', {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify({
-                              name_company: name_company,
-                              tel_company: tel_company,
-                              email_company: email_company,
-                              logradouro: Logradouro,
-                              bairro: Bairro,
-                              cidade: Cidade,
-                              password_company: password_company,
-                              CNPJ: CNPJ
-                          }),
-                      })
-                      .then(response => response.json())
-                        .then(data => {
-                            if (data.message) {
-                                new Notify({
-                                    status: 'success',
-                                    title: 'Empresa Cadastrada!',
-                                    text: 'Sua empresa foi cadastrada com sucesso, faça seu login :)',
-                                    effect: 'fade',
-                                    speed: 300,
-                                    customClass: '',
-                                    customIcon: '',
-                                    showIcon: true,
-                                    showCloseButton: true,
-                                    autoclose: true,
-                                    autotimeout: 3000,
-                                    notificationsGap: null,
-                                    notificationsPadding: null,
-                                    type: 'outline',
-                                    position: 'x-center',
-                                    customWrapper: '',
-                                });
-                            } else {
+                        fetch('http://localhost:3000/criar_empresa', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                name_company: name_company,
+                                tel_company: tel_company,
+                                email_company: email_company,
+                                logradouro: Logradouro,
+                                bairro: Bairro,
+                                cidade: Cidade,
+                                password_company: password_company,
+                                CNPJ: CNPJ
+                            }),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.message) {
+                                    new Notify({
+                                        status: 'success',
+                                        title: 'Empresa Cadastrada!',
+                                        text: 'Sua empresa foi cadastrada com sucesso, faça seu login :)',
+                                        effect: 'fade',
+                                        speed: 300,
+                                        customClass: '',
+                                        customIcon: '',
+                                        showIcon: true,
+                                        showCloseButton: true,
+                                        autoclose: true,
+                                        autotimeout: 3000,
+                                        notificationsGap: null,
+                                        notificationsPadding: null,
+                                        type: 'outline',
+                                        position: 'x-center',
+                                        customWrapper: '',
+                                    });
+                                } else {
+                                    new Notify({
+                                        status: 'error',
+                                        title: 'Erro ao se cadastrar!',
+                                        text: data.error || 'Verifique suas informações e tente novamente!',
+                                        effect: 'fade',
+                                        speed: 300,
+                                        customClass: '',
+                                        customIcon: '',
+                                        showIcon: true,
+                                        showCloseButton: true,
+                                        autoclose: true,
+                                        autotimeout: 3000,
+                                        notificationsGap: null,
+                                        notificationsPadding: null,
+                                        type: 'outline',
+                                        position: 'x-center',
+                                        customWrapper: '',
+                                    });
+                                }
+                            })
+                            .catch((error) => {
+                                console.error('Error:', error);
                                 new Notify({
                                     status: 'error',
                                     title: 'Erro ao se cadastrar!',
@@ -514,37 +566,18 @@
                                     position: 'x-center',
                                     customWrapper: '',
                                 });
-                            }
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                            new Notify({
-                                status: 'error',
-                                title: 'Erro ao se cadastrar!',
-                                text: data.error || 'Verifique suas informações e tente novamente!',
-                                effect: 'fade',
-                                speed: 300,
-                                customClass: '',
-                                customIcon: '',
-                                showIcon: true,
-                                showCloseButton: true,
-                                autoclose: true,
-                                autotimeout: 3000,
-                                notificationsGap: null,
-                                notificationsPadding: null,
-                                type: 'outline',
-                                position: 'x-center',
-                                customWrapper: '',
                             });
-                        });
                     }
-              </script>
+
+                </script>
             </section>
         </section>
     </section>
+        
     <script src="../js/script.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/app.js"></script>
 
 </body>
+
 </html>

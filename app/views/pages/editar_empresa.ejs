@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Empresa</title>
-    
+
     <link rel="stylesheet" href="../css/editar.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/modal_editar_empresa.css">
@@ -23,21 +24,22 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 </head>
+
 <body onload="updateUserUI()">
 
-    <header> 
+    <header>
         <a href="/" class="logo"><i class="ri-ancient-gate-fill"></i><span>Skooterz™</span>
-    </a>
+        </a>
         </a>
         </section>
         <ul class="navbar">
-            
+
             <li><a href="/shape">Shapes </a></li>
             <li><a href="/skate">Skates </a></li>
             <li><a href="/roupas">Roupas </a></li>
             <li><a href="/acessorios">Acessórios</a></li>
             <li><a href="/tenis">Tenis</a></li>
-            
+
         </ul><!--Cabecalho-Link-->
         <section class="main">
             <a href="#" class="user" id="user">
@@ -51,37 +53,38 @@
                 </a>
             </section>
             <section id="user-dropdown" class="dropdown hidden">
-                <a onclick="logoutUser()" id="logout"><i class="fa-solid fa-right-from-bracket" style="color: #ff0000;"></i>ㅤLogout</a>
+                <a onclick="logoutUser()" id="logout"><i class="fa-solid fa-right-from-bracket"
+                        style="color: #ff0000;"></i>ㅤLogout</a>
             </section>
         </section>
         <script>
             function updateUserUI() {
-        const userName = localStorage.getItem('userName');
-        const userElement = document.getElementById('user');
-        const userDropdown = document.getElementById('user-dropdown');
-        
-        if (userName) {
-            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
-            userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
-            userElement.addEventListener('click', function() {
-                userDropdown.classList.toggle('hidden');
-            });
-        } else {
-            userElement.innerHTML = `<i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se`;
-            userElement.href = "/login";
-        }
-    }
+                const userName = localStorage.getItem('userName');
+                const userElement = document.getElementById('user');
+                const userDropdown = document.getElementById('user-dropdown');
 
-    
-    // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
-    window.onload = function() {
-        updateUserUI();
-        CarregarProdutos();
-        CarregarDadosEmpresa();
-    }
+                if (userName) {
+                    userElement.innerHTML = `<i class="ri-user-3-fill"></i> Olá ${userName}`;
+                    userElement.href = "#"; // Opcional: você pode alterar o link de redirecionamento
+                    userElement.addEventListener('click', function () {
+                        userDropdown.classList.toggle('hidden');
+                    });
+                } else {
+                    userElement.innerHTML = `<i class="ri-user-3-fill"></i> Faça seu login <br>ou registre-se`;
+                    userElement.href = "/login";
+                }
+            }
+
+
+            // Chame updateUserUI ao carregar a página para verificar se o usuário já está logado
+            window.onload = function () {
+                updateUserUI();
+                CarregarProdutos();
+                CarregarDadosEmpresa();
+            }
 
         </script>
-    
+
     </header>
 
     <h1 class="info_company">Registro</h1>
@@ -95,7 +98,7 @@
                     <input type="email" id="email" name="email" placeholder="Email" readonly>
                     <input type="text" id="cnpj" name="cnpj" placeholder="CPNJ" readonly>
                 </section>
-            
+
                 <section class="form-column">
                     <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" readonly>
                     <input type="text" id="bairro" name="bairro" placeholder="Bairro" readonly>
@@ -122,9 +125,9 @@
                 </button>
             </section>
         </section>
-        
+
         <section class="products" id="productsList">
-            
+
         </section>
     </section>
 
@@ -135,20 +138,21 @@
                 <h1 class="title-modal">Dados Do Produto</h1>
                 <form class="form-modal">
                     <input type="text" id="productName" name="name" placeholder="Nome Do Produto">
-                    <input type="text" id="productSize" name="size" placeholder="Tamanho">
+                    <input type="text" id="productSize" name="size" placeholder='Tamanho: Separe com ","'>
                     <input type="text" id="productBrand" name="brand" placeholder="Marca">
                     <input type="number" id="productValue" name="value" placeholder="Valor(R$)">
                     <input type="text" id="productDescription" name="description" placeholder="Descrição">
                     <input type="text" id="productURL" name="url_produto" placeholder="URL do produto">
                 </form>
-                
-                
+
+
             </section>
-            
+
             <section class="frame-2">
                 <section class="instruction">
                     <h1 class="title-modal">Olá vendedor</h1>
-                    <p class="description-modal">Adicione as fotos do produto que <br>deseja anunciar na Skooterz aqui.</p>
+                    <p class="description-modal">Adicione as fotos do produto que <br>deseja anunciar na Skooterz aqui.
+                    </p>
                 </section>
                 <section class="picture_modal">
                     <label class="imageContainer" for="fileInput" tabIndex="0">
@@ -157,12 +161,12 @@
                     <input type="file" name="fileInput" id="fileInput">
                 </section>
                 <section class="btnSalvar-modal"></section>
-                    <button class="salvar-modal" type="button" style="margin-top: 20px;">
-                        <span class="btnText-modal">Salvar</span>
-                    </button>
-                </section>
+                <button class="salvar-modal" type="button" style="margin-top: 20px;">
+                    <span class="btnText-modal">Salvar</span>
+                </button>
             </section>
         </section>
+    </section>
     </section>
     <!-- Modal de Confirmação -->
     <section class="confirmation-modal" id="confirmationModal">
@@ -187,27 +191,27 @@
             const imgProd = document.getElementById('imgProduto');
             let imgBase64 = "";
 
-            if(imgProd){
+            if (imgProd) {
                 imgBase64 = imgProd.src
             }
-            
-            if(!imgBase64){
+
+            if (!imgBase64) {
                 new Notify({
-                        status: 'error',
-                        title: 'Erro',
-                        text: 'Favor selecionar uma imagem',
-                        effect: 'fade',
-                        speed: 300,
-                        showIcon: true,
-                        showCloseButton: true,
-                        autoclose: true,
-                        autotimeout: 3000,
-                        type: 'outline',
-                        position: 'x-center',
-                    });
-                    return
+                    status: 'error',
+                    title: 'Erro',
+                    text: 'Favor selecionar uma imagem',
+                    effect: 'fade',
+                    speed: 300,
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    type: 'outline',
+                    position: 'x-center',
+                });
+                return
             }
-            
+
             fetch('http://localhost:3000/products', {
                 method: 'POST',
                 headers: {
@@ -224,29 +228,46 @@
                     imagem: imgBase64
                 }),
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    new Notify({
-                        status: 'success',
-                        title: 'Produto Criado!',
-                        text: 'O produto foi criado com sucesso!',
-                        effect: 'fade',
-                        speed: 300,
-                        showIcon: true,
-                        showCloseButton: true,
-                        autoclose: true,
-                        autotimeout: 3000,
-                        type: 'outline',
-                        position: 'x-center',
-                    });
-                    window.location.reload();
-                    //CarregarProdutos();
-                } else {
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        new Notify({
+                            status: 'success',
+                            title: 'Produto Criado!',
+                            text: 'O produto foi criado com sucesso!',
+                            effect: 'fade',
+                            speed: 300,
+                            showIcon: true,
+                            showCloseButton: true,
+                            autoclose: true,
+                            autotimeout: 3000,
+                            type: 'outline',
+                            position: 'x-center',
+                        });
+                        window.location.reload();
+                        //CarregarProdutos();
+                    } else {
+                        new Notify({
+                            status: 'error',
+                            title: 'Erro ao Criar Produto!',
+                            text: 'Ocorreu um erro ao criar o produto. Por favor, tente novamente.',
+                            effect: 'fade',
+                            speed: 300,
+                            showIcon: true,
+                            showCloseButton: true,
+                            autoclose: true,
+                            autotimeout: 3000,
+                            type: 'outline',
+                            position: 'x-center',
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
                     new Notify({
                         status: 'error',
-                        title: 'Erro ao Criar Produto!',
-                        text: 'Ocorreu um erro ao criar o produto. Por favor, tente novamente.',
+                        title: 'Erro no Servidor!',
+                        text: 'Ocorreu um erro no servidor, por favor, tente novamente mais tarde.',
                         effect: 'fade',
                         speed: 300,
                         showIcon: true,
@@ -256,24 +277,7 @@
                         type: 'outline',
                         position: 'x-center',
                     });
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                new Notify({
-                    status: 'error',
-                    title: 'Erro no Servidor!',
-                    text: 'Ocorreu um erro no servidor, por favor, tente novamente mais tarde.',
-                    effect: 'fade',
-                    speed: 300,
-                    showIcon: true,
-                    showCloseButton: true,
-                    autoclose: true,
-                    autotimeout: 3000,
-                    type: 'outline',
-                    position: 'x-center',
                 });
-            });
         }
 
 
@@ -485,98 +489,120 @@
                 const productCard = event.target.closest('.product-card');
                 const productId = productCard.getAttribute('data-id');
 
+                // Mostrar o modal
+                document.getElementById('productModal').style.display = 'block';
+
                 // Preencher o modal com as informações do produto
                 preencherModal(productId, productCard);
 
-                // Mostrar o modal
-                document.getElementById('productModal').style.display = 'block';
             }
         });
 
         function preencherModal(id, productCard) {
-        const name = productCard.querySelector('.product-title').innerText;
-        const size = productCard.querySelector('.product-size').innerText.replace('Tamanho: ', '');
-        const brand = productCard.querySelector('.product-brand').innerText.replace('Marca: ', '');
-        const value = productCard.querySelector('.product-price').innerText.replace('R$ ', '');
-        const description = productCard.querySelector('.product-description').innerText.replace('Descrição: ', '');
-        const URL = productCard.querySelector('.product-url a').getAttribute('href'); // Corrige para pegar a URL corretamente
-        const imageSrc = productCard.querySelector('.product-image').src;
 
-        // Preencher os campos do modal
-        document.getElementById('productName').value = name;
-        document.getElementById('productSize').value = size;
-        document.getElementById('productBrand').value = brand;
-        document.getElementById('productValue').value = value;
-        document.getElementById('productDescription').value = description;
-        document.getElementById('productURL').value = URL;
+            async function convertImageToBase64(url) {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+            }
 
-        // Preencher a pré-visualização da imagem no modal
-        const imagePlaceholder = document.querySelector('.imagePlaceholder');
-        if (imagePlaceholder) {
-            imagePlaceholder.style.backgroundImage = `url(${imageSrc})`;
+            const name = productCard.querySelector('.product-title').innerText;
+            const size = productCard.querySelector('.product-size').innerText.replace('Tamanho: ', '');
+            const brand = productCard.querySelector('.product-brand').innerText.replace('Marca: ', '');
+            const value = productCard.querySelector('.product-price').innerText.replace('R$ ', '');
+            const description = productCard.querySelector('.product-description').innerText.replace('Descrição: ', '');
+            const URL = productCard.querySelector('.product-url a').getAttribute('href'); // Corrige para pegar a URL corretamente
+            const imageSrc = productCard.querySelector('.product-image').src;
+
+            // Preencher os campos do modal
+            document.getElementById('productName').value = name;
+            document.getElementById('productSize').value = size;
+            document.getElementById('productBrand').value = brand;
+            document.getElementById('productValue').value = value;
+            document.getElementById('productDescription').value = description;
+            document.getElementById('productURL').value = URL;
+
+            // Preencher a pré-visualização da imagem no modal
+            /*const imagePlaceholder = document.querySelector('.imagePlaceholder');
+            if (imagePlaceholder) {
+                imagePlaceholder.style.backgroundImage = `url(${imageSrc})`;
+            }*/
+
+            // Salvar o ID do produto no botão de salvar
+            document.querySelector('.salvar-modal').setAttribute('data-id', id);
+
+            if(!document.getElementsByClassName("imagePlaceholder")[0].innerHTML.includes("imgProduto")){
+                document.getElementsByClassName("imagePlaceholder")[0].innerHTML  = "<img src='' class='displayedImage' id='imgProduto'>";
+            }
+
+            // Uso da função
+            convertImageToBase64(imageSrc).then(base64String => {
+                console.log(base64String);
+                const imgProduto = document.getElementById('imgProduto');
+                imgProduto.src = base64String;
+
+            }).catch(error => {
+                console.error('Erro ao converter a imagem:', error);
+            });
+
+
+            
         }
 
-        // Salvar o ID do produto no botão de salvar
-        document.querySelector('.salvar-modal').setAttribute('data-id', id);
-    }
+        document.querySelector('.salvar-modal').addEventListener('click', function () {
+            const productId = this.getAttribute('data-id');
 
-    document.querySelector('.salvar-modal').addEventListener('click', function () {
-        const productId = this.getAttribute('data-id');
-
-        if (productId) {
-            atualizarProduto(productId);
-        } else {
-            criarProduto();
-        }
-    });
+            if (productId) {
+                atualizarProduto(productId);
+            } else {
+                criarProduto();
+            }
+        });
 
         function getBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-    }
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
 
-    async function atualizarProduto(id) {
-    const name_product = document.getElementById('productName').value.trim();
-    const tamanho = document.getElementById('productSize').value.trim();
-    const marca = document.getElementById('productBrand').value.trim();
-    const valor = document.getElementById('productValue').value.trim();
-    const descricao = document.getElementById('productDescription').value.trim();
-    const URL = document.getElementById('productURL').value.trim();
-    const fileInput = document.getElementById('fileInput');
-    let imgBase64 = "";
+        async function atualizarProduto(id) {
+            const name_product = document.getElementById('productName').value.trim();
+            const tamanho = document.getElementById('productSize').value.trim();
+            const marca = document.getElementById('productBrand').value.trim();
+            const valor = document.getElementById('productValue').value.trim();
+            const descricao = document.getElementById('productDescription').value.trim();
+            const URL = document.getElementById('productURL').value.trim();
+            const imgProduto = document.getElementById('imgProduto');
+            const fileInput = document.getElementById('fileInput');
+            let imgBase64 = imgProduto.src;
 
-    // Verifica se uma nova imagem foi selecionada
-    if (fileInput.files && fileInput.files[0]) {
-        const file = fileInput.files[0];
-        imgBase64 = await getBase64(file); // Função para converter a imagem em base64
-    } else {
-        // Caso a imagem não tenha sido alterada, pega a imagem existente no placeholder
-        const imagePlaceholder = document.querySelector('.imagePlaceholder');
-        imgBase64 = imagePlaceholder.style.backgroundImage.slice(5, -2); // Remove o 'url("")' para pegar o valor correto
-    }
 
-    try {
-        const response = await fetch(`http://localhost:3000/products/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name_product: name_product,
-                tamanho: tamanho,
-                marca: marca,
-                valor: valor,
-                descricao: descricao,
-                url_produto: URL,
-                imagem: imgBase64 // Envia a imagem atual ou a nova imagem
-            }),
-        });
+            try {
+                const response = await fetch(`http://localhost:3000/products/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name_product: name_product,
+                        tamanho: tamanho,
+                        marca: marca,
+                        valor: valor,
+                        descricao: descricao,
+                        url_produto: URL,
+                        imagem: imgBase64 // Envia a imagem atual ou a nova imagem
+                    }),
+                });
 
-        const data = await response.json();
+                const data = await response.json();
 
                 if (response.ok) {
                     new Notify({
@@ -670,4 +696,5 @@
     <script src="../js/frontend.js"></script>
     <script src="../js/script.js"></script>
 </body>
+
 </html>

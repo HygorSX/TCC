@@ -173,7 +173,21 @@
             document.querySelector('.descricao p').textContent = descricao;
         }
         if (tamanho) {
-            document.querySelector('.tamanho-calçado').textContent = tamanho;
+            // Divide o tamanho em uma lista, separando por vírgulas
+            const tamanhos = tamanho.split(',').map(t => t.trim());
+
+            // Cria uma string com várias sections para os tamanhos
+            let tamanhoSections = '';
+            tamanhos.forEach(tam => {
+                tamanhoSections += `<section class="tamanho-calçado">${tam}</section>`;
+            });
+
+            // Substitui o conteúdo original com as seções de tamanhos
+            const numerosCalcado = document.querySelector('#numeros-calcado');
+            numerosCalcado.innerHTML = `
+                <label class="tamanho">Tamanho:</label><br>
+                ${tamanhoSections}
+            `;
         }
         if (imagem) {
             // Atualiza a imagem se o URL estiver presente
