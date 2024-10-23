@@ -106,11 +106,6 @@
                     <input type="password" id="senha" name="senha" placeholder="Senha" readonly>
                 </section>
             </form>
-            <section class="btnSalvar">
-                <button class="salvar" type="submit">
-                    <span class="btnText">Salvar</span>
-                </button>
-            </section>
         </section>
     </section>
 
@@ -143,6 +138,15 @@
                     <input type="number" id="productValue" name="value" placeholder="Valor(R$)">
                     <input type="text" id="productDescription" name="description" placeholder="Descrição">
                     <input type="text" id="productURL" name="url_produto" placeholder="URL do produto">
+                    <select name="category" id="productCategory">
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="TENIS">Tênis</option>
+                        <option value="ROUPAS">Roupas</option>
+                        <option value="ACESSORIOS">Acessórios</option>
+                        <option value="SHAPES">Shapes</option>
+                        <option value="SKATES">Skates</option>
+                    </select>
+
                 </form>
 
 
@@ -187,14 +191,17 @@
             const valor = document.getElementById('productValue').value.trim();
             const descricao = document.getElementById('productDescription').value.trim();
             const URL = document.getElementById('productURL').value.trim();
+            const categoria = document.getElementById('productCategory').value;
             const id_empresa = JSON.parse(localStorage.getItem('empresa')).ID_EMPRESAS;
             const imgProd = document.getElementById('imgProduto');
             let imgBase64 = "";
 
+            // Verificação se uma imagem foi selecionada
             if (imgProd) {
-                imgBase64 = imgProd.src
+                imgBase64 = imgProd.src;
             }
 
+            // Verifica se a imagem foi carregada
             if (!imgBase64) {
                 new Notify({
                     status: 'error',
@@ -209,9 +216,28 @@
                     type: 'outline',
                     position: 'x-center',
                 });
-                return
+                return;
             }
 
+            // Verifica se a categoria foi selecionada
+            if (!categoria) {
+                new Notify({
+                    status: 'error',
+                    title: 'Erro',
+                    text: 'Favor selecionar uma categoria',
+                    effect: 'fade',
+                    speed: 300,
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    type: 'outline',
+                    position: 'x-center',
+                });
+                return;
+            }
+
+            // Faz a requisição para o servidor para criar o produto
             fetch('http://localhost:3000/products', {
                 method: 'POST',
                 headers: {
@@ -225,7 +251,8 @@
                     valor: valor,
                     descricao: descricao,
                     url_produto: URL,
-                    imagem: imgBase64
+                    imagem: imgBase64,
+                    categoria: categoria // Incluindo a categoria
                 }),
             })
                 .then(response => response.json())
@@ -245,7 +272,6 @@
                             position: 'x-center',
                         });
                         window.location.reload();
-                        //CarregarProdutos();
                     } else {
                         new Notify({
                             status: 'error',
@@ -282,6 +308,7 @@
 
 
 
+
         function renderProducts(products) {
             const productsList = document.getElementById('productsList');
             productsList.innerHTML = ''; // Limpa a lista antes de renderizar
@@ -305,6 +332,7 @@
                         <p class="product-brand">Marca: ${product.MARCA || 'Não especificado'}</p>
                         <p class="product-description">Descrição: ${product.DESCRICAO || 'Descrição não disponível'}</p>
                         <p class="product-url">URL: <a href="${product.URL_PRODUTO || '#'}" target="_blank">${product.URL_PRODUTO ? product.URL_PRODUTO : 'URL não disponível'}</a></p>
+                        <p class="product-category">Categoria: ${product.CATEGORIA}</p>
                         <div class="product-actions">
                             <button class="edit-button"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
                             <button class="delete-button"><i class="fa-solid fa-trash"></i> Excluir</button>
@@ -491,6 +519,7 @@
 
                 // Mostrar o modal
                 document.getElementById('productModal').style.display = 'block';
+                limparModal();
 
                 // Preencher o modal com as informações do produto
                 preencherModal(productId, productCard);
@@ -515,6 +544,7 @@
             const size = productCard.querySelector('.product-size').innerText.replace('Tamanho: ', '');
             const brand = productCard.querySelector('.product-brand').innerText.replace('Marca: ', '');
             const value = productCard.querySelector('.product-price').innerText.replace('R$ ', '');
+            const category = productCard.querySelector('.product-category').innerText.replace('Categoria: ', '');
             const description = productCard.querySelector('.product-description').innerText.replace('Descrição: ', '');
             const URL = productCard.querySelector('.product-url a').getAttribute('href'); // Corrige para pegar a URL corretamente
             const imageSrc = productCard.querySelector('.product-image').src;
@@ -526,6 +556,10 @@
             document.getElementById('productValue').value = value;
             document.getElementById('productDescription').value = description;
             document.getElementById('productURL').value = URL;
+            document.getElementById('productCategory').value = category;
+
+            const selectElement = document.getElementById('productCategory');
+            selectElement.value = category;
 
             // Preencher a pré-visualização da imagem no modal
             /*const imagePlaceholder = document.querySelector('.imagePlaceholder');
@@ -536,8 +570,8 @@
             // Salvar o ID do produto no botão de salvar
             document.querySelector('.salvar-modal').setAttribute('data-id', id);
 
-            if(!document.getElementsByClassName("imagePlaceholder")[0].innerHTML.includes("imgProduto")){
-                document.getElementsByClassName("imagePlaceholder")[0].innerHTML  = "<img src='' class='displayedImage' id='imgProduto'>";
+            if (!document.getElementsByClassName("imagePlaceholder")[0].innerHTML.includes("imgProduto")) {
+                document.getElementsByClassName("imagePlaceholder")[0].innerHTML = "<img src='' class='displayedImage' id='imgProduto'>";
             }
 
             // Uso da função
@@ -551,7 +585,7 @@
             });
 
 
-            
+
         }
 
         document.querySelector('.salvar-modal').addEventListener('click', function () {
@@ -580,10 +614,9 @@
             const valor = document.getElementById('productValue').value.trim();
             const descricao = document.getElementById('productDescription').value.trim();
             const URL = document.getElementById('productURL').value.trim();
+            const categoria = document.getElementById('productCategory').value; // Coleta a categoria
             const imgProduto = document.getElementById('imgProduto');
-            const fileInput = document.getElementById('fileInput');
             let imgBase64 = imgProduto.src;
-
 
             try {
                 const response = await fetch(`http://localhost:3000/products/${id}`, {
@@ -598,6 +631,7 @@
                         valor: valor,
                         descricao: descricao,
                         url_produto: URL,
+                        categoria: categoria, // Inclui a categoria no corpo da requisição
                         imagem: imgBase64 // Envia a imagem atual ou a nova imagem
                     }),
                 });
@@ -655,6 +689,7 @@
             }
         }
 
+
         document.querySelector('.close-button').addEventListener('click', function () {
             document.getElementById('productModal').style.display = 'none';
             document.querySelector('.salvar-modal').removeAttribute('data-id');
@@ -689,6 +724,29 @@
             }
         }
 
+        function limparModal() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productSize').value = '';
+            document.getElementById('productBrand').value = '';
+            document.getElementById('productValue').value = '';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productURL').value = '';
+
+            // Limpa a pré-visualização da imagem
+            const imgProduto = document.getElementById('imgProduto');
+            if (imgProduto) {
+                imgProduto.src = '';
+            }
+
+            // Limpa o campo de upload de imagem
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput) {
+                fileInput.value = ''; // Resetar o campo de arquivo
+            }
+
+            // Remove o ID do botão de salvar (caso esteja presente)
+            document.querySelector('.salvar-modal').removeAttribute('data-id');
+        }
     </script>
     <script src="../js/editar.js"></script>
     <script src="../js/jquery.js"></script>
