@@ -13,11 +13,11 @@ router.get("/buypage", function (req, res) {
     res.render("pages/buypage",{pagina:"pages/buypage"});
 });
 
-router.get("/shape", function (req, res) {
+router.get("/shapes", function (req, res) {
     res.render("pages/shape",{pagina:"pages/shape"});
 });
 
-router.get("/skate", function (req, res) {
+router.get("/skates", function (req, res) {
     res.render("pages/skate",{pagina:"pages/skate"});
 });
 

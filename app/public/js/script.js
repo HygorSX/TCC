@@ -122,6 +122,59 @@ async function carregarProdutos() {
     }
 }
 
+async function carregarProdutosPorCategoria() {
+    // Obtém a categoria diretamente da URL (ex: "/tenis" -> "TENIS")
+    const path = window.location.pathname;  // Exemplo: "/tenis"
+    const categoria = path.substring(1).toUpperCase(); // Remove "/" e converte para maiúsculas ("TENIS")
+
+    console.log('Carregando produtos da categoria:', categoria);
+
+    try {
+        // Faz a requisição passando a categoria extraída da URL
+        const response = await fetch(`http://localhost:3000/products/categoria/${categoria}`);
+        if (!response.ok) {
+            throw new Error('Erro ao buscar os produtos, status: ' + response.status);
+        }
+
+        const data = await response.json();
+        console.log('Dados recebidos:', data);
+
+        const produtos = data.produtos;
+        const produtosContainer = document.getElementById('produtos');
+        produtosContainer.innerHTML = '';
+
+        // Verifica se o array de produtos é válido e contém itens
+        if (!Array.isArray(produtos) || produtos.length === 0) {
+            // Exibe uma mensagem caso não haja produtos
+            produtosContainer.innerHTML = `<section style="display: block">
+                                            <p style="margin-top: 2rem">Nenhum produto encontrado para essa categoria.</p>
+                                           <img src="imagens/naoencontrado.svg" alt="nao_encontrado">
+                                           </section>`
+            return; // Sai da função para evitar a tentativa de renderizar produtos inexistentes
+        }
+
+        // Renderiza os produtos, caso existam
+        produtos.forEach(produto => {
+            const imagemUrl = produto.IMAGEM ? `/imagens_produto/${produto.IMAGEM}` : '/imagens/default.jpg';
+            const produtoCard = `
+                <section class="produto-card">
+                    <img src="${imagemUrl}" alt="${produto.NOME}">
+                    <h2><a href="#">${produto.NOME}</a></h2>
+                    <p>Marca: ${produto.MARCA}</p>
+                    <p class="preco">Preço: R$ ${produto.VALOR}</p>
+                    <br>
+                    <a href="/buypage?nome=${produto.NOME}&preco=${produto.VALOR}&descricao=${produto.DESCRICAO}&tamanho=${produto.TAMANHO}&imagem=/imagens_produto/${produto.IMAGEM}&link=${produto.URL_PRODUTO}" class="buy">Compre Agora</a>
+                </section>
+            `;
+            produtosContainer.innerHTML += produtoCard;
+        });
+    } catch (error) {
+        console.error('Erro ao carregar os produtos:', error);
+        document.getElementById('produtos').innerHTML = '<p>Erro ao carregar os produtos.</p>'; // Mostra uma mensagem de erro na página
+    }
+}
+
+
 function verificarUsuarioOuEmpresa() {
     const empresa = localStorage.getItem('empresa');
     const usuario = localStorage.getItem('usuario');

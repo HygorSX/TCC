@@ -30,8 +30,8 @@
         </section>
         <ul class="navbar">
 
-            <li><a href="/shape">Shapes </a></li>
-            <li><a href="/skate">Skates </a></li>
+            <li><a href="/shapes">Shapes </a></li>
+            <li><a href="/skates">Skates </a></li>
             <li><a href="/roupas">Roupas </a></li>
             <li><a href="/acessorios">Acessórios</a></li>
             <li><a href="/tenis">Tenis</a></li>
@@ -56,9 +56,9 @@
     </header>
     <h1 class="titulo-promo"> Destaque-se com <a class="promo">tênis</a> estilosos da Skooterz</h1>
 
-    <section class="produtos">
-        <section class="produto-card">
-            <!-- Os produtos aparecerão aqui -->
+    <section id="produtos-container" class="produtos">
+        <section id="produtos" class="produtos">
+
         </section>
     </section>
     <footer>
@@ -117,6 +117,11 @@
                     </section>
                 </section>
     </footer>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    carregarProdutosPorCategoria();
+});
+    </script>
     <script src="../js/script.js"></script>
 </body>
 

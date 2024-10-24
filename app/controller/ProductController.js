@@ -138,6 +138,20 @@ class ProductController {
             return res.status(200).json({ produtos: results });
         });
     }
+
+    static MostrarPorCategoria(req, res) {
+        const { categoria } = req.params; // Obtém a categoria a partir dos parâmetros da URL
+        const sql = 'SELECT * FROM PRODUCTS WHERE CATEGORIA = ?';
+    
+        pool.query(sql, [categoria], (err, results) => {
+            if (err) {
+                res.status(500).json({ error: 'Erro no banco de dados.' });
+            } else {
+                res.status(200).json({ message: "Produtos da categoria buscados com sucesso", produtos: results });
+            }
+        });
+    }
+    
 }
 
 module.exports = ProductController;
