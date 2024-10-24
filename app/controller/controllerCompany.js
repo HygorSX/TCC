@@ -1,6 +1,6 @@
 const pool = require("../other/conexao");
 const jwt = require("../other/tokenJwt");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 class ControllerCompany {
     static async Criar(req, res) {
